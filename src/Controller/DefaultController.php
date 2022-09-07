@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class DefaultController extends AbstractController
 {
    /**
-    * @Route("/app/{slug?}", name="app", requirements={"slug"=".+"})")
+    * @Route("/app/", name="app")
     */
     public function app(): Response
     {
