@@ -29,6 +29,9 @@ class SiteWeb
     #[ORM\Column(type: Types::ARRAY)]
     private array $theme_colors = [];
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $products = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class SiteWeb
     public function setThemeColors(array $theme_colors): self
     {
         $this->theme_colors = $theme_colors;
+
+        return $this;
+    }
+
+    public function getProducts(): ?array
+    {
+        return $this->products;
+    }
+
+    public function setProducts(?array $products): self
+    {
+        $this->products = $products;
 
         return $this;
     }
