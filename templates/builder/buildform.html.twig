@@ -14,7 +14,7 @@
     <div class="card article p-6 my-6">
       <h2 class="is-bold is-size-3">Informations générales</h2>
       <p>Message Twig</p>
-
+      {#
       <form class="my-4">
         <div class="field">
           <label class="label">Nom de votre Site</label>
@@ -34,6 +34,9 @@
           </p>
         </div>
       </form>
+      #}
+
+      <div class="container">{{ form(siteWebForm) }}</div>
     </div>
   </div>
 {% endblock %}
