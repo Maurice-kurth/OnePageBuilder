@@ -36,7 +36,7 @@
                     <a href="{{ path('builder_form') }}">Construire ma page</a>
                   </li>
                   <li>
-                    <a href="">Connexion</a>
+                    <a href="{{ path('app_register') }}">Connexion</a>
                   </li>
                 </ul>
               </div>
@@ -48,6 +48,13 @@
 
     {% block body %}
 
+    {% endblock %}
+    {% block footer %}
+      <footer class="footer">
+        <div class="content has-text-centered">
+          <a href="{{ path('app_logout') }}" class="button">Déconnexion</a>
+        </div>
+      </footer>
     {% endblock %}
     {% block specialStyles %}
 
