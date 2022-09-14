@@ -13,19 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ManagerRegistry;
 
 
-
 class BuilderController extends AbstractController
 {
 
 
 
-   /**
-    * @Route("/", name="builder")
-    */
-    public function builder(): Response
-    {
-      return $this->render('builder/builder.html.twig');
-    }
+  
     /**
     * @Route("/builderform/", name="builder_form")
     */
@@ -94,5 +87,7 @@ class BuilderController extends AbstractController
         'url' => $siteWeb->getNomSite(),
       ]);
     }
+
+
  
 }
