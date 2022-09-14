@@ -51,6 +51,8 @@ class DefaultController extends AbstractController
     ]);
     $ftpService->saveFile($renderedFile->getContent(), $nomFichier);
 
-    return $this->render('ftp/saved.html.twig');
+    return $this->render('ftp/saved.html.twig', [
+      'site' => $siteWeb,
+    ]);
   }
 }

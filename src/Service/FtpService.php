@@ -24,7 +24,7 @@ class FtpService
         //Check if the file exists already on the server
         $files_on_server = ftp_nlist($ftp_connection, "maurice/minisites");
 
-        /* Messages de confirmation
+
         if (!in_array($file, $files_on_server)) {
             echo "Le fichier $file n'existe pas sur le serveur, on le transfère" . "<br>";
             //Put the file in the remote server directory
@@ -35,7 +35,7 @@ class FtpService
             }
         } else {
             echo "Le fichier $file existe déjà sur le serveur, il a été mis à jour" . "<br>";
-        }*/
+        }
 
         ftp_put($ftp_connection, $remote_server_dir . '/' . $file, $local_dir . '/' . $file, FTP_BINARY);
         //close
@@ -53,5 +53,7 @@ class FtpService
         $file = fopen("F:/wamp64/www/LCDZ/OnePage/onepage/src/websites/" . $nomFichier . ".html", "w");
         fwrite($file, $renderedFile);
         fclose($file);
+
+        return $renderedFile;
     }
 }
