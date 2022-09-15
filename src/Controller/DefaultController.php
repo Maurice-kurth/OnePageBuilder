@@ -19,6 +19,7 @@ class DefaultController extends AbstractController
    */
   public function builder(StatusMessageGenerator $statusMessageGenerator): Response
   {
+
     $message = $statusMessageGenerator->getStatusMessage();
     return $this->render('index.html.twig', [
       'message' => $message,

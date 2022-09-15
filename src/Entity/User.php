@@ -29,6 +29,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\OneToOne(inversedBy: 'proprietaire', cascade: ['persist', 'remove'])]
+    private ?SiteWeb $siteweb = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,5 +102,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getSiteweb(): ?SiteWeb
+    {
+        return $this->siteweb;
+    }
+
+    public function setSiteweb(?SiteWeb $siteweb): self
+    {
+        $this->siteweb = $siteweb;
+
+        return $this;
     }
 }

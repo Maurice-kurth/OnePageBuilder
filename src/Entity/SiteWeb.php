@@ -20,9 +20,6 @@ class SiteWeb
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description_site = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $proprietaire = null;
-
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
@@ -31,6 +28,10 @@ class SiteWeb
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private ?array $products = null;
+
+    #[ORM\OneToOne(mappedBy: 'siteweb', cascade: ['persist', 'remove'])]
+    private ?User $proprietaire = null;
+
 
     public function getId(): ?int
     {
@@ -61,17 +62,7 @@ class SiteWeb
         return $this;
     }
 
-    public function getProprietaire(): ?string
-    {
-        return $this->proprietaire;
-    }
 
-    public function setProprietaire(?string $proprietaire): self
-    {
-        $this->proprietaire = $proprietaire;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -105,6 +96,28 @@ class SiteWeb
     public function setProducts(?array $products): self
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getProprietaire(): ?User
+    {
+        return $this->proprietaire;
+    }
+
+    public function setProprietaire(?User $proprietaire): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($proprietaire === null && $this->proprietaire !== null) {
+            $this->proprietaire->setSiteweb(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($proprietaire !== null && $proprietaire->getSiteweb() !== $this) {
+            $proprietaire->setSiteweb($this);
+        }
+
+        $this->proprietaire = $proprietaire;
 
         return $this;
     }
