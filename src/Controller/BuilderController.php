@@ -14,19 +14,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
+#[IsGranted('ROLE_USER')]
 class BuilderController extends AbstractController
 {
-
-
-
-
-    /**
-     * @Route("/builderform/", name="builder_form")
-     */
+  
+    #[Route('/builderform', name: 'builder_form')]
     public function buildForm(Request $request, ManagerRegistry $doctrine): Response
     {
+       
+
         //Create a new SiteWeb object and initialize it with some data for this example
         $siteWeb = new SiteWeb();
         $siteWeb->setCreatedAt(new \DateTimeImmutable('now'));
@@ -72,8 +70,14 @@ class BuilderController extends AbstractController
             'siteWebForm' => $siteWebForm,
         ]);
     }
+    #[Route('/builderjs', name: 'builder_form_js')]
+    public function buildFormJs(): Response
+{
 
-
+    return $this->renderForm('builder/jsbuilder.html.twig', [
+        'phphello' => 'Hello from PHP',
+    ]);
+}
     #[Route('/builder/site/{nom_site}', name: 'builder_show', methods: ['GET'])]
     public function showSite(SiteWeb $siteWeb): Response
     {
