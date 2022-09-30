@@ -13,7 +13,7 @@ class ServerInfo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne( inversedBy:"serverInfo", cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -52,7 +52,7 @@ class LoginController extends AbstractController
 
     //Show the user profile
     #[Route('/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager,)
+    public function profile(Request $request, EntityManagerInterface $entityManager) : Response
     {
         $user = $this->getUser();
         $serverInfo = $user->getServerInfo();
