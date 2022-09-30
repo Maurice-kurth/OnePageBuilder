@@ -55,6 +55,7 @@ class LoginController extends AbstractController
     public function profile(Request $request, EntityManagerInterface $entityManager) : Response
     {
         $user = $this->getUser();
+
         $serverInfo = $user->getServerInfo();
 
         //Create the form
@@ -73,9 +74,9 @@ class LoginController extends AbstractController
             $ftpUser = $editUserForm->get('ftp_user')->getData();
             $ftpPass = $editUserForm->get('ftp_pass')->getData();
             //Set the ftpInfo property of the serverinfo
-            $serverInfo->setFtpHost($ftpHost, '');
-            $serverInfo->setFtpUser($ftpUser, '');
-            $serverInfo->setFtpPass($ftpPass, '');
+            $serverInfo->setFtpHost($ftpHost);
+            $serverInfo->setFtpUser($ftpUser);
+            $serverInfo->setFtpPass($ftpPass);
 
             $entityManager->persist($user);
             $entityManager->persist($serverInfo);
