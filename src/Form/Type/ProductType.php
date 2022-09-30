@@ -14,9 +14,6 @@ class ProductType extends AbstractType{
             // ->add('ajouter', ButtonType::class, ['label' => 'Ajouter un nouveau produit', 'attr' => array('class'=>'addProduct')])
             ->add('Name')
             ->add('Price')
-            ->add('Description')
-           
-        ;
+            ->add('Description');
     }
- 
 }
