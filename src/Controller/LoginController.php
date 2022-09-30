@@ -2,11 +2,19 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Form\EditUserType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\User;
+use App\Entity\ServerInfo;
 
 class LoginController extends AbstractController
 {
@@ -44,13 +52,38 @@ class LoginController extends AbstractController
 
     //Show the user profile
     #[Route('/profile', name: 'app_profile')]
-    public function profile()
+    public function profile(Request $request, EntityManagerInterface $entityManager)
     {
         $user = $this->getUser();
-        //$siteweb = $user->getSiteweb();
+        $serverInfo = $user->getServerInfo();
+
+        //Create the form
+        $editUserForm = $this->createForm(EditUserType::class, $user);
+
+        //Handling the form
+        //TODO : Refactoriser tout ça
+        $editUserForm->handleRequest($request);
+        if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {
+            //Change user's properties
+            $user = $editUserForm->getData();
+            //Get the ftpInfo field of the form
+            $ftpHost = $editUserForm->get('ftp_host')->getData();
+            $ftpUser = $editUserForm->get('ftp_user')->getData();
+            $ftpPass = $editUserForm->get('ftp_pass')->getData();
+            //Set the ftpInfo property of the serverinfo
+            $serverInfo->setFtpHost($ftpHost, '');
+            $serverInfo->setFtpUser($ftpUser, '');
+            $serverInfo->setFtpPass($ftpPass, '');
+
+            $entityManager->persist($user);
+            $entityManager->persist($serverInfo);
+            $entityManager->flush();
+        }
+
+
         return $this->render('login/profile.html.twig', [
             'user' => $this->getUser(),
-            //'siteweb' => $siteweb,
+            'editUserForm' => $editUserForm->createView(),
         ]);
     }
 }

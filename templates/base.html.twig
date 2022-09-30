@@ -36,12 +36,16 @@
                   <li>
                     <a href="{{ path('builder_form') }}">Construire ma page</a>
                   </li>
-                  <li>
-                    <a href="{{ path('app_login') }}">Connexion</a>
-                  </li>
                   {% if is_granted('ROLE_USER') %}
+                    <li style="font-size:1.2rem;">
+                      <a href="{{ path('app_profile') }}"><i class="fa-solid fa-circle-user"></i></a>
+                    </li>
                     <li>
                       <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{{ path('app_login') }}">Connexion</a>
                     </li>
                   {% endif %}
                 </ul>
@@ -52,7 +56,9 @@
       </nav>
     {% endblock %}
     {% block body %}
-
+      {% block pagetitle %}
+        <h1>Titre de ma page</h1>
+      {% endblock %}
     {% endblock %}
     {% block footer %}
 

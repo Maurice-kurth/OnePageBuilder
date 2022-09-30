@@ -11,6 +11,8 @@ import "./styles/app.css";
 // start the Stimulus application
 import "./bootstrap";
 
+import "./js/forms.js";
+
 import { createApp } from "vue";
 import DefaultApp from "./js/DefaultApp.vue";
 import BuilderForm from "./js/BuilderForm.vue";

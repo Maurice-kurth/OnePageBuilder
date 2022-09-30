@@ -32,6 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(inversedBy: 'proprietaire', cascade: ['persist', 'remove'])]
     private ?SiteWeb $siteweb = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?ServerInfo $serverInfo = null;
+
 
 
     public function getId(): ?int
@@ -112,6 +115,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setSiteweb(?SiteWeb $siteweb): self
     {
         $this->siteweb = $siteweb;
+
+        return $this;
+    }
+
+    public function getServerInfo(): ?ServerInfo
+    {
+        return $this->serverInfo;
+    }
+
+    public function setServerInfo(?ServerInfo $serverInfo): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($serverInfo === null && $this->serverInfo !== null) {
+            $this->serverInfo->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($serverInfo !== null && $serverInfo->getUser() !== $this) {
+            $serverInfo->setUser($this);
+        }
+
+        $this->serverInfo = $serverInfo;
 
         return $this;
     }

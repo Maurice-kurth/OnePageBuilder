@@ -36,3 +36,10 @@ h2 {
 .navbar-item img {
     max-height: 5rem;
 }
+
+.productFields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

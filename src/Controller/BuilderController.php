@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Entity\SiteWeb;
+use App\Form\Type\ProductType;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\SiteWeb;
-use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class BuilderController extends AbstractController
@@ -42,6 +43,8 @@ class BuilderController extends AbstractController
         $siteWebForm = $this->createFormBuilder($siteWeb)
             ->add('nom_site', TextType::class)
             ->add('description_site', TextAreaType::class)
+           // ->add('products', ProductType::class, ['attr' => array('class'=>'productFields')])
+
             ->add('save', SubmitType::class, ['label' => 'Créer mon Site Web'])
 
             ->getForm();

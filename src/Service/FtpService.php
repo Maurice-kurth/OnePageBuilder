@@ -5,13 +5,15 @@ namespace App\Service;
 class FtpService
 {
 
-    public function sendFile($file): string
+
+    public function sendFile($file, $ftp_host, $ftp_user, $ftp_pass): string
     {
         // TODO : Put in config file
 
-        $ftp_host = "ssh.cluster010.hosting.ovh.net";
+        /*$ftp_host = "ssh.cluster010.hosting.ovh.net";
         $ftp_user = "lacouleu";
-        $ftp_pass = "RemiZCEF";
+        $ftp_pass = "RemiZCEF";*/
+
 
         $local_dir = "F:/wamp64/www/LCDZ/OnePage/onepage/src/websites";
         $remote_server_dir = '/maurice/minisites';
