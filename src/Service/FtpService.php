@@ -65,7 +65,7 @@ class FtpService
         $miniSiteDir = $this->local_websites_dir . '/src/websites/';
 
         //save the rendered file to the server
-        $file = fopen("F:/wamp64/www/LCDZ/OnePage/onepage/src/websites/" . $nomFichier . ".html", "w");
+        $file = fopen($miniSiteDir . $nomFichier . ".html", "w");
         fwrite($file, $renderedFile);
         fclose($file);
 
