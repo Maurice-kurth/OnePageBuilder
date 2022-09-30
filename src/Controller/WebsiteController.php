@@ -15,7 +15,7 @@ class WebsiteController extends AbstractController
 
 
   #[Route('/{nom_site}/send', name: 'ftp_send', methods: ['GET'])]
-  public function sendFtp(FtpService $ftpService, Request $request): Response
+  public function sendFtp(FtpService $ftpService, Request $request, string $projectDir): Response
   {
     $routeParams = $request->attributes->get('_route_params');
 
@@ -27,7 +27,7 @@ class WebsiteController extends AbstractController
     $ftp_user = $user->getServerInfo()->getFtpUser();
     $ftp_pass = $user->getServerInfo()->getFtpPass();
 
-    $file = $ftpService->sendFile($fileUrl, $ftp_host, $ftp_user, $ftp_pass);
+    $file = $ftpService->sendFile($fileUrl, $ftp_host, $ftp_user, $ftp_pass,$projectDir);
 
     //read the content of the file
     return $this->render('ftp/sent.html.twig', [

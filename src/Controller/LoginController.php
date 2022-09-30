@@ -52,7 +52,7 @@ class LoginController extends AbstractController
 
     //Show the user profile
     #[Route('/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager)
+    public function profile(Request $request, EntityManagerInterface $entityManager,)
     {
         $user = $this->getUser();
         $serverInfo = $user->getServerInfo();
@@ -60,6 +60,8 @@ class LoginController extends AbstractController
         //Create the form
         $editUserForm = $this->createForm(EditUserType::class, $user);
 
+        
+        
         //Handling the form
         //TODO : Refactoriser tout ça
         $editUserForm->handleRequest($request);
