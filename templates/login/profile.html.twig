@@ -4,13 +4,19 @@
     <h1 class="title">Mon profil</h1>
   </section>
 
-  <div class="container has-text-centered my-5">
-    <p>Nom d'utilisateur : {{ user.username }}</p>
+  {% if user.siteweb %}
+    <div class="container has-text-centered my-5">
+      <p>Nom d'utilisateur : {{ user.username }}</p>
 
-    <p>Nom de mon site web : {{ user.siteweb.nomSite }}</p>
-    <a href="{{ path('builder_show', { nom_site: user.siteweb.nomSite }) }}" class="button is-primary">Voir mon site</a>
-  </div>
-
+      <p>Nom de mon site web : {{ user.siteweb.nomSite }}</p>
+      <a href="{{ path('builder_show', { nom_site: user.siteweb.nomSite }) }}" class="button is-primary">Voir mon site</a>
+    </div>
+  {% else %}
+    <div class="container has-text-centered my-5">
+      <p>Il semblerait que vous n'ayez pas encore de site...</p>
+      <a href="{{ path('builder_form') }}" class="button is-primary">Créez un site maintenant !</a>
+    </div>
+  {% endif %}
   <div class="container">{{ form_start(editUserForm) }}
     {{ form_widget(editUserForm) }}
     {{ form_end(editUserForm) }}</div>
