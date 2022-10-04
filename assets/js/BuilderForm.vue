@@ -36,6 +36,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -46,9 +47,18 @@ export default {
   },
   methods: {
     formSubmit() {
-      console.log("Form submitted");
-      console.log(this.nomSite);
-      console.log(this.presentationSite);
+      axios
+        .post("/api/jsform", {
+          nomSite: this.nomSite,
+          presentationSite: this.presentationSite,
+        })
+        .then((response) => {
+          if (response.status == 200) {
+            console.log("it worked !");
+          } else {
+            console.log("it failed !");
+          }
+        });
     },
   },
 };

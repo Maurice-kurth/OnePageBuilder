@@ -1,0 +1,38 @@
+/*!*************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css ***!
+  \*************************************************************************************************/
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700);
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css (1) ***!
+  \*****************************************************************************************************/
+@import url(https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css);
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css (2) ***!
+  \*****************************************************************************************************/
+h1,
+h2 {
+  color: #8A4D76;
+}
+
+.navbar-item img {
+  max-height: 5rem;
+}
+
+.productFields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=app.css.map */
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQThCQTs7RUFFSSxjQTNCWTtBQ0FoQjs7QUQ4QkE7RUFDSSxnQkFBZ0I7QUMzQnBCOztBRDhCQTtFQUNJLG9CQUFhO0VBQ2Isb0JBQW1CO0VBQ25CLGFBQWE7RUFDYiw4QkFBdUI7RUFDMUI7TUMzQkssdUJBQXVCO1VBQ25CLG1CQUFtQjtFQUMzQix5QkFBeUI7TUFDckIsc0JBQXNCO1VBQ2xCLG1CQUFtQjtFQUMzQix3QkFBd0I7TUFDcEIscUJBQXFCO1VBQ2pCLHVCQUF1QjtBQUNqQztBQUNBLGtDQUFrQyxDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXNzZXRzL3N0eWxlcy9hcHAuc2NzcyIsIndlYnBhY2s6Ly8vLi9hc3NldHMvc3R5bGVzL2FwcC5jc3MiXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=*/

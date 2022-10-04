@@ -70,14 +70,8 @@ class BuilderController extends AbstractController
             'siteWebForm' => $siteWebForm,
         ]);
     }
-    #[Route('/builderjs', name: 'builder_form_js')]
-    public function buildFormJs(): Response
-{
+   
 
-    return $this->renderForm('builder/jsbuilder.html.twig', [
-        'phphello' => 'Hello from PHP',
-    ]);
-}
     #[Route('/builder/site/{nom_site}', name: 'builder_show', methods: ['GET'])]
     public function showSite(SiteWeb $siteWeb): Response
     {
