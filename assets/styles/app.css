@@ -1,8 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import url("https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css");
 h1,
-h2 {
+h2,
+h3,
+h4 {
   color: #8A4D76;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-block: 2.5rem;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-block: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-block: 1.5rem;
 }
 
 .navbar-item img {
@@ -23,5 +41,9 @@ h2 {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.vue-form .column {
+  max-width: 50%;
 }
 /*# sourceMappingURL=app.css.map */

@@ -29,8 +29,27 @@ $input-shadow: none;
 // Bulma Configuration END ***************************************************************//
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
     color: $purple;
+    font-weight: 600;
+
+}
+
+h1 {
+    font-size: 4rem;
+    margin-block: 2.5rem;
+}
+
+h2 {
+    font-size: 3rem;
+    margin-block: 2rem;
+}
+
+h3 {
+    font-size: 2rem;
+    margin-block: 1.5rem;
 }
 
 .navbar-item img {
@@ -42,4 +61,10 @@ h2 {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.vue-form {
+    .column {
+        max-width: 50%;
+    }
 }

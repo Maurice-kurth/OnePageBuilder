@@ -79,6 +79,23 @@ class JsBuilderController extends AbstractController
         return $this->redirectToRoute('builder_success', ['nom_site' => $siteWeb->getNomSite()]);
 
     }
+
+    #[Route('/api/siteinfo', name: 'api_siteinfo')]
+    public function getSiteInfo(Request $request, ManagerRegistry $doctrine)
+    {
+        //get current user
+
+        $siteName = $this->getUser()->getSiteweb()->getNomSite();
+      
+        $siteWeb = $doctrine->getRepository(SiteWeb::class)->findOneBy(['nom_site' => $siteName]);
+        $siteWebArray = [
+            'nomSite' => $siteWeb->getNomSite(),
+            'descriptionSite' => $siteWeb->getDescriptionSite(),
+            'themeColors' => $siteWeb->getThemeColors(),
+            'products' => $siteWeb->getProducts(),
+        ];
+        return $this->json($siteWebArray);
+    }
     
 
 }
