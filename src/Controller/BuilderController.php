@@ -85,6 +85,7 @@ class BuilderController extends AbstractController
     #[Route('/builder/success/{nom_site}', name: 'builder_success', methods: ['GET'])]
     public function builderSuccess(SiteWeb $siteWeb): Response
     {
+       
         return $this->render('builder/builderSuccess.html.twig', [
             'url' => $siteWeb->getNomSite(),
         ]);

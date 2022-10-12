@@ -43,7 +43,73 @@ h3 {
           justify-content: center;
 }
 
-.vue-form .column {
-  max-width: 50%;
+#vue-builder-form .container {
+  max-width: clamp(300px, 50%, 800px);
+}
+
+#vue-builder-form .column {
+  max-width: 400px;
+}
+
+.colorPicker-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0.5rem;
+}
+
+.colorPicker-color {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.purple {
+  background-color: #8A4D76;
+}
+
+.darkBlue {
+  background-color: #150050;
+}
+
+.pink {
+  background-color: #FA7C91;
+}
+
+.colorPicker-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 1rem;
 }
 /*# sourceMappingURL=app.css.map */

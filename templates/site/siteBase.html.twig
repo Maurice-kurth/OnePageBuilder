@@ -10,6 +10,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 
+    {# <link rel="stylesheet" href="assets/styles/css/customCss.css" /> #}
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
       {{ encore_entry_link_tags('app') }}
@@ -33,6 +34,14 @@
                 <a href="{{ path('ftp_save', { nom_site: site.nomSite }) }}" class="button is-outline mx-4">Sauvegarder <i class="ml-2 fa-solid fa-floppy-disk"></i></a>
 
                 <a href="{{ path('ftp_send', { nom_site: site.nomSite }) }}" class="button is-info">Publier <i class="ml-2 fa-solid fa-arrow-up-from-bracket"></i></a>
+
+                {% if siteSaved is defined %}
+                  <p>Le site vient d'être sauvegardé !</p>
+                {% elseif siteSent is defined %}
+                  <p>Le site vient d'être mis en ligne !</p>
+                {% else %}
+                  {# nothing #}
+                {% endif %}
               </div>
             </div>
           {% endif %}
@@ -44,7 +53,7 @@
                     <a href="{{ path('builder') }}">Votre lien 1</a>
                   </li>
                   <li>
-                    <a href="{{ path('builder_form') }}">Votre lien 2</a>
+                    <a href="{{ path('builder_form_js') }}">Votre lien 2</a>
                   </li>
                   <li>
                     <a href="{{ path('app_register') }}">Votre lien 3</a>

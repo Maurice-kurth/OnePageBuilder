@@ -63,8 +63,50 @@ h3 {
     justify-content: center;
 }
 
-.vue-form {
-    .column {
-        max-width: 50%;
+#vue-builder-form {
+    .container {
+        max-width: clamp(300px, 50%, 800px);
     }
+
+    .column {
+        max-width: 400px;
+    }
+}
+
+.colorPicker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.colorPicker-color {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.purple {
+    background-color: $purple;
+}
+
+.darkBlue {
+    background-color: #150050;
+}
+
+.pink {
+    background-color: $pink;
+}
+
+.colorPicker-column {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
 }

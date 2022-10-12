@@ -1,5 +1,5 @@
 <template>
-  <div class="card container article p-6 my-6">
+  <div class="card container article p-3 my-6">
     <h2>Formulaire pour les informations de votre site web</h2>
     <p>{{ monMessage }}</p>
     <div class="vue-form my-4">
@@ -23,7 +23,11 @@
               <div class="field">
                 <label class="label">Logo du site</label>
                 <div class="control">
-                  <input class="input" type="file" />
+                  <input
+                    class="input"
+                    @change="handleLogoUpload($event)"
+                    type="file"
+                  />
                 </div>
               </div>
             </div>
@@ -41,10 +45,31 @@
                     class="textarea"
                     type="textarea"
                     v-model="presentationSite"
-                    placeholder="Ce site sert à ..."
+                    placeholder="Tagline de votre site ..."
                   />
                 </div>
               </div>
+            </div>
+          </div>
+          <!-- Color Picker -->
+          <div class="is-flex colorPicker-column">
+            <div class="colorPicker-container">
+              <div class="colorPicker-color darkBlue"></div>
+              <input
+                name="themeColor"
+                type="radio"
+                v-model="themeColors"
+                value="#000000,#150050,#3F0071"
+              />
+            </div>
+            <div class="colorPicker-container">
+              <div class="colorPicker-color pink"></div>
+              <input
+                name="themeColor"
+                type="radio"
+                v-model="themeColors"
+                value="#F07DEA,#A460ED,#9FC9F3"
+              />
             </div>
           </div>
         </section>
@@ -57,8 +82,8 @@
           </span>
 
           <div class="columns is-multiline">
-            <div v-for="product in products">
-              <div class="field column is-one-quarter">
+            <div v-for="product in products" class="column is-one-quarter">
+              <div class="field">
                 <div class="control">
                   <input
                     class="input"
@@ -80,6 +105,13 @@
             <button type="button" class="button is-success" @click="addProduct">
               Ajouter un produit
             </button>
+            <button
+              type="button"
+              class="button is-danger"
+              @click="removeProduct"
+            >
+              Supprimer un produit
+            </button>
           </div>
         </section>
         <!-- Fin Section Produits -->
@@ -88,6 +120,9 @@
         <div style="margin-top: 30px" class="field">
           <p class="control">
             <button type="submit" class="button is-success">Valider</button>
+            <span v-if="successMessage"
+              >{{ successMessage }} <a :href="siteUrl">Voir le site </a></span
+            >
           </p>
         </div>
       </form>
@@ -100,22 +135,48 @@ export default {
   data() {
     return {
       monMessage: "Hello from Vue !",
+      successMessage: false,
       nomSite: "",
       presentationSite: "",
+      siteLogo: "",
       products: [
         {
           name: "Produit 1",
           price: 10,
         },
       ],
+      themeColors: "",
+      themeColorsArray: [],
     };
+  },
+  computed: {
+    siteUrl() {
+      return "builder/site/" + this.nomSite;
+    },
+  },
+  watch: {
+    themeColors: function (newVal, oldVal) {
+      this.themeColorsArray = newVal.split(",");
+      //make themeColorsArray a named array with keys primary, secondary, tertiary
+      this.themeColorsArray = {
+        primary: this.themeColorsArray[0],
+        secondary: this.themeColorsArray[1],
+        tertiary: this.themeColorsArray[2],
+      };
+    },
   },
   mounted() {
     //Utiliser avec AJAX une route contenant en JSON  les données du site de la BDD pour prépeupler le formulaire
     console.log("Vuejs monté");
-    axios.get("/api/siteinfo").then((response) => {
-      this.populateFieldsFromApi(response.data);
-    });
+    axios
+      .get("/api/siteinfo")
+      .catch((error) => {
+        console.log("erreur 500 sur le get");
+      })
+      .then((response) => {
+        console.log(response);
+        this.populateFieldsFromApi(response.data);
+      });
   },
   methods: {
     addProduct() {
@@ -124,26 +185,42 @@ export default {
         price: 0,
       });
     },
+    removeProduct() {
+      this.products.pop();
+    },
+    handleLogoUpload(event) {
+      this.siteLogo = event.target.files[0];
+      console.log(this.siteLogo);
+    },
     formSubmit() {
-      this.savetoDb();
+      this.saveToDb();
     },
     populateFieldsFromApi(data) {
       this.nomSite = data.nomSite;
-      this.presentationSite = data.presentationSite;
-      this.products = data.products;
+      this.presentationSite = data.descriptionSite;
+      this.products = data.products || this.products;
     },
     saveToDb() {
+      let formData = new FormData();
+      if (this.siteLogo != null) {
+        formData.append("siteLogo", this.siteLogo);
+      }
+      formData.append("nom_site", this.nomSite);
+      formData.append("presentationSite", this.presentationSite);
+      formData.append("products", JSON.stringify(this.products));
+      formData.append("themeColors", JSON.stringify(this.themeColorsArray));
       axios
-        .post("/api/jsform", {
-          nomSite: this.nomSite,
-          presentationSite: this.presentationSite,
+        .post("/api/jsform", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         })
         .then((response) => {
-          if (response.status == 200) {
-            console.log("it worked !");
-          } else {
-            console.log("it failed !");
-          }
+          this.successMessage = "Formulaire envoyé avec succès";
+          console.log(formData);
+        })
+        .catch((error) => {
+          console.log(formData);
         });
     },
   },
