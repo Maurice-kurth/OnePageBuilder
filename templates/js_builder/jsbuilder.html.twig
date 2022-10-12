@@ -1,7 +1,7 @@
 {% extends './base.html.twig' %}
 
 {% block body %}
-  <section class="hero is-warning is-medium is-bold">
+  <section class="hero is-warning is-small is-bold">
     <div class="hero-body">
       <div class="container has-text-centered">
         <h1 class="title">Voici le formulaire qui vous permettra <br /> de créer votre mini-site en quelques minutes !</h1>
@@ -11,4 +11,9 @@
   </section>
 
   <section id="vue-builder-form"></section>
+
+  {# 
+  <section id="twig-builder-form">{{ form_start(form) }}
+    {{ form(form) }}
+    {{ form_end(form) }}</section>#}
 {% endblock %}

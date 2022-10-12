@@ -44,7 +44,7 @@ class WebsiteController extends AbstractController
       $ftp_host = $userServerInfo->getFtpHost();
       $ftp_user = $userServerInfo->getFtpUser();
       $ftp_pass = $userServerInfo->getFtpPass();
-*/
+    */
     $routeParams = $request->attributes->get('_route_params');
     $nomFichier = $routeParams['nom_site'];
 
@@ -53,7 +53,8 @@ class WebsiteController extends AbstractController
     ]);
     $ftpService->saveFile($renderedFile->getContent(), $nomFichier);
 
-    return $this->render('ftp/saved.html.twig', [
+    return $this->render('builder/show.html.twig', [
+      'siteSaved' => true,
       'site' => $siteWeb,
     ]);
   }

@@ -14,7 +14,7 @@ class SiteWebType extends AbstractType
         $builder
             ->add('nom_site')
             ->add('description_site')
-            ->add('proprietaire')
+           // ->add('proprietaire')
             ->add('created_at')
             ->add('theme_colors')
         ;

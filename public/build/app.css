@@ -1,0 +1,126 @@
+/*!*************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css ***!
+  \*************************************************************************************************/
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,700);
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css (1) ***!
+  \*****************************************************************************************************/
+@import url(https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css);
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-4.use[1]!./assets/styles/app.css (2) ***!
+  \*****************************************************************************************************/
+h1,
+h2,
+h3,
+h4 {
+  color: #8A4D76;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 4rem;
+  margin-block: 2.5rem;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-block: 2rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-block: 1.5rem;
+}
+
+.navbar-item img {
+  max-height: 5rem;
+}
+
+.productFields {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#vue-builder-form .container {
+  max-width: clamp(300px, 50%, 800px);
+}
+
+#vue-builder-form .column {
+  max-width: 400px;
+}
+
+.colorPicker-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0.5rem;
+}
+
+.colorPicker-color {
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.purple {
+  background-color: #8A4D76;
+}
+
+.darkBlue {
+  background-color: #150050;
+}
+
+.pink {
+  background-color: #FA7C91;
+}
+
+.colorPicker-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  gap: 1rem;
+}
+/*# sourceMappingURL=app.css.map */
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXBwLmNzcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQThCQTs7OztFQUlJLGNBN0JZO0VBOEJaLGdCQUFnQjtBQzNCcEI7O0FEK0JBO0VBQ0ksZUFBZTtFQUNmLG9CQUFvQjtBQzVCeEI7O0FEK0JBO0VBQ0ksZUFBZTtFQUNmLGtCQUFrQjtBQzVCdEI7O0FEK0JBO0VBQ0ksZUFBZTtFQUNmLG9CQUFvQjtBQzVCeEI7O0FEK0JBO0VBQ0ksZ0JBQWdCO0FDNUJwQjs7QUQrQkE7RUFDSSxvQkFBYTtFQUNiLG9CQUFtQjtFQUNuQixhQUFhO0VBQ2IsOEJBQXVCO0VBQzFCO01DNUJLLHVCQUF1QjtVRDhCN0IsbUJBQ2U7RUFDUCx5QkFBVztNQUNkO1VDN0JLLG1CQUFtQjtFRDBCN0Isd0JBS1k7TUFDSixxQkFBZ0I7VUFDbkI7QUM3Qkw7O0FBRUE7RURnQ0ksbUNBQXNCO0FDOUIxQjs7QUFFQTtFRGdDQztBQzlCRDs7QUFFQTtFRGdDSSxvQkFBVztFQUNYLG9CQUFZO0VBQ1osYUFBYTtFQUNiLDRCQUFtQjtFQUNuQiw2QkFBdUI7TUFDdkIsMEJBQWU7VUFDbEI7RUM5QkMseUJBQXlCO01EZ0MzQixzQkFBUTtVQUNKLG1CQXpGWTtFQTBGZjtNQzlCSyxxQkFBcUI7VURnQ2pCO0VBQ047QUM5Qko7O0FEaUNBO0VBQ0ksa0JBaEdHO0VBaUdOO0VDOUJDLFlBQVk7RURnQ2Qsb0JBQW9CO0VBQ2hCLG9CQUFhO0VBQ2I7RUFDQSx5QkFBbUI7TUFDbkIsc0JBQWlCO1VBQ1osbUJBQUk7RUFDWjtNQzlCSyxxQkFBcUI7VUFDakIsdUJBQXVCO0VBQy9CLGVBQWU7QUFDakI7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxvQkFBb0I7RUFDcEIsb0JBQW9CO0VBQ3BCLGFBQWE7RUFDYiw4QkFBOEI7RUFDOUIsNkJBQTZCO01BQ3pCLHVCQUF1QjtVQUNuQixtQkFBbUI7RUFDM0IseUJBQXlCO01BQ3JCLHNCQUFzQjtVQUNsQixtQkFBbUI7RUFDM0IsdUJBQXVCO01BQ25CLG9CQUFvQjtVQUNoQiwyQkFBMkI7RUFDbkMsU0FBUztBQUNYO0FBQ0Esa0NBQWtDLEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hc3NldHMvc3R5bGVzL2FwcC5zY3NzIiwid2VicGFjazovLy8uL2Fzc2V0cy9zdHlsZXMvYXBwLmNzcyJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==*/
