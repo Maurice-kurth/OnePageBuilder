@@ -6,43 +6,43 @@ use App\Entity\User;
 use DateTimeImmutable;
 use App\Entity\SiteWeb;
 use App\Form\SiteWebType;
+use App\Service\OnepageCreatorService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 #[IsGranted('ROLE_USER')]
 class JsBuilderController extends AbstractController
 {
+
     #[Route('/builderjs', name: 'builder_form_js')]
     public function renderJsForm()
     {
-
-       // $form = $this->createForm(SiteWebType::class);
-
         $view = $this->renderView('/js_builder/jsbuilder.html.twig', [
-           // 'form' => $form->createView(),
             'phphello' => 'Hello from PHP',
         ]);
-
         return new Response($view);
     }
 
   
- 
-
     #[Route('/api/jsform', name: 'api_jsform', methods: ['POST'])]
 
-    public function sendForm(Request $request, ManagerRegistry $doctrine)
+    public function sendForm(Request $request, ManagerRegistry $doctrine, OnepageCreatorService $onepageCreatorService)
     {
         //get the formData from the request
         $data = $request->request->all();
  
     
         //TODO :  make a service to handle this
+
+        //Call the OnePageCreatorService to create the website
+        $onePageCreatorService->createOnePage($data);
+        
 
         //Attribute data
         $siteName = $data['nom_site'];
@@ -51,11 +51,17 @@ class JsBuilderController extends AbstractController
         $siteProducts =  json_decode($data['products'],true ) ?? [['name' => 'Product manquant', 'price' => 0, 'weight' => 1.6]];
         
         //Fichier de destination de l'image
-        $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+      
+
+        //make a folder for the user if it doesn't exist
+        if(!file_exists($project_dir.'/onepages/'.$this->getUser()->getUserIdentifier())){
+            mkdir($project_dir.'/onepages/'.$this->getUser()->getUserIdentifier());
+        }
+        $destination = $project_dir.'/onepages/'.$this->getUser()->getUserIdentifier().'/';
 
         //Récupération du fichier
         $siteLogo = $request->files->get('siteLogo');
-
+        
         //save $siteLogo to $destination folder
         $siteLogo->move($destination, $siteLogo->getClientOriginalName());
 
