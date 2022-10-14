@@ -102,7 +102,11 @@
             </div>
           </div>
           <div>
-            <button type="button" class="button is-success" @click="addProduct">
+            <button
+              type="button"
+              class="button is-info mr-4"
+              @click="addProduct"
+            >
               Ajouter un produit
             </button>
             <button
@@ -119,11 +123,14 @@
         <!-- Envoi du formulaire -->
         <div style="margin-top: 30px" class="field">
           <p class="control">
-            <button type="submit" class="button is-success">Valider</button>
-            <span v-if="successMessage"
-              >{{ successMessage }} <a :href="siteUrl">Voir le site </a></span
-            >
+            <button type="submit" class="button is-info">Valider</button>
           </p>
+          <div v-if="successMessage">
+            <p>
+              {{ successMessage }}
+            </p>
+            <a class="button is-success" :href="siteUrl">Voir le site </a>
+          </div>
         </div>
       </form>
     </div>

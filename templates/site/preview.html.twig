@@ -1,0 +1,71 @@
+{% extends '/site/squelette.html.twig' %}
+{% block title %}
+  <title>Prévisualisation : {{ site.nomSite }}</title>
+{% endblock %}
+{% block styles %}
+  {{ encore_entry_link_tags('app') }}
+  {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block header %}
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/uploads/{{ site.proprietaire.username }}/sitelogo.png" alt="Logo" /></a>
+        <span class="navbar-burger burger" data-target="navbarMenu"></span>
+      </div>
+      {% if is_granted('ROLE_USER') %}
+        <div class="navbar-start is-align-self-center">
+          <div class="is-flex">
+            <a href="{{ path('builder_form_js') }}" class="button is-outline is-info mx-4">Modifier <i class="ml-2 fa-solid fa-pen-to-square"></i></a>
+
+            <a href="{{ path('ftp_save', { nom_site: site.nomSite }) }}" class="button is-outline mx-4">Sauvegarder <i class="ml-2 fa-solid fa-floppy-disk"></i></a>
+
+            <a href="{{ path('ftp_send', { nom_site: site.nomSite }) }}" class="button is-success">Publier <i class="ml-2 fa-solid fa-arrow-up-from-bracket"></i></a>
+
+            {% if siteSaved is defined %}
+              <p>Le site vient d'être sauvegardé !</p>
+            {% elseif siteSent is defined %}
+              <p>Le site vient d'être mis en ligne !</p>
+            {% else %}
+              {# nothing #}
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      {% include 'site/sections/navigation.html.twig' %}
+    </div>
+  </nav>
+{% endblock %}
+{% block main %}
+  {% include 'site/sections/hero.html.twig' %}
+
+  {% if site.products is defined %}
+    {% include 'site/sections/produits.html.twig' %}
+  {% endif %}
+
+  {% if site.faq is defined %}
+    {% include 'site/sections/faq.html.twig' %}
+  {% endif %}
+{% endblock %}
+{% block footer %}
+  {% include 'site/sections/footer.html.twig' %}
+  <a href="{{ path('app_logout') }}" class="button">Déconnexion <i class="ml-2 fas fa-power-off"></i></a>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const themeColors = JSON.parse('{{ site.themeColors | json_encode | raw }}')
+    document.querySelectorAll('.is-primary').forEach((el) => {
+      el.style.backgroundColor = themeColors['primary']
+    })
+    //get is-secondary and set their background-color
+    document.querySelectorAll('.is-secondary').forEach((el) => {
+      el.style.backgroundColor = themeColors['secondary']
+    })
+    //get is-secondary and set their background-color
+    document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
+      el.style.color = themeColors['tertiary']
+    })
+  </script>
+{% endblock %}

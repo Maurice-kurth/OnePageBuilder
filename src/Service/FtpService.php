@@ -2,29 +2,37 @@
 
 namespace App\Service;
 
+use Symfony\Component\Security\Core\Security;
+
 class FtpService
 {
 
     private $local_websites_dir;
-
+    private $security;
     public function __construct( 
-        string $local_websites_dir
+        string $local_websites_dir,
+        Security $security
     ) {
         $this->local_websites_dir = $local_websites_dir;
+        $this->security = $security;
     }
 
-    public function sendFile($file, $ftp_host, $ftp_user, $ftp_pass): string
+    public function sendFile( $ftp_host, $ftp_user, $ftp_pass): string
     {
-        // TODO : Put in config file
+
+        $user = $this->security->getUser();
+        $miniSiteDir = $this->local_websites_dir . '/userwebsites/' .$user->getUsername() ;
+      
 
         /*$ftp_host = "ssh.cluster010.hosting.ovh.net";
         $ftp_user = "lacouleu";
         $ftp_pass = "RemiZCEF";*/
 
 
-        //full path on local = "F:/wamp64/www/LCDZ/OnePage/onepage/src/websites";
-        $miniSiteDir = $this->local_websites_dir . '/src/websites/';
+        //full path on local = "F:/wamp64/www/LCDZ/OnePage/onepage/userwebsites/username";
+       
 
+        $file = $miniSiteDir . '/index.html';
 
         $remote_server_dir = 'maurice/minisites';
 
@@ -61,13 +69,21 @@ class FtpService
     public function saveFile($renderedFile, $nomFichier)
     {
 
-        
-        $miniSiteDir = $this->local_websites_dir . '/src/websites/';
+        $user = $this->security->getUser();
+        $miniSiteDir = $this->local_websites_dir . '/userwebsites/' .$user->getUsername() .'/' ;
+      
+        //transform $nomFichier into a slug and lowercase
+        $slugFichier = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $nomFichier)));
 
-        //save the rendered file to the server
-        $file = fopen($miniSiteDir . $nomFichier . ".html", "w");
+        //save the rendered file to the user folder
+        $file = fopen($miniSiteDir . "index.html", "w");
         fwrite($file, $renderedFile);
         fclose($file);
+
+        //copy the onepagestyles.css file to the user folder
+        copy($this->local_websites_dir . '/userwebsites/default/onepagestyles.css', $miniSiteDir . '/css/defaultStyle.css');
+        //copy minBulma.css to the user folder
+        copy($this->local_websites_dir . '/userwebsites/default/defaultBulma.min.css', $miniSiteDir . '/css/bulma.min.css');
 
         return $renderedFile;
     }

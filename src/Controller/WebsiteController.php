@@ -19,7 +19,7 @@ class WebsiteController extends AbstractController
   {
     $routeParams = $request->attributes->get('_route_params');
 
-    $fileUrl = $routeParams['nom_site'] . '.html';
+    //$fileUrl = $routeParams['nom_site'] . '.html';
 
     $user = $this->getUser();
 
@@ -27,7 +27,7 @@ class WebsiteController extends AbstractController
     $ftp_user = $user->getServerInfo()->getFtpUser();
     $ftp_pass = $user->getServerInfo()->getFtpPass();
 
-    $file = $ftpService->sendFile($fileUrl, $ftp_host, $ftp_user, $ftp_pass,$projectDir);
+    $file = $ftpService->sendFile( $ftp_host, $ftp_user, $ftp_pass,$projectDir);
 
     //read the content of the file
     return $this->render('ftp/sent.html.twig', [
@@ -48,14 +48,15 @@ class WebsiteController extends AbstractController
     $routeParams = $request->attributes->get('_route_params');
     $nomFichier = $routeParams['nom_site'];
 
-    $renderedFile = $this->render('builder/show.html.twig', [
+    $renderedFile = $this->render('site/onepage.html.twig', [
       'site' => $siteWeb,
     ]);
     $ftpService->saveFile($renderedFile->getContent(), $nomFichier);
 
-    return $this->render('builder/show.html.twig', [
-      'siteSaved' => true,
+    //redirecttoroute builder_show
+    return $this->redirectToRoute('builder_show', [
       'site' => $siteWeb,
+      'nom_site' => $siteWeb->getNomSite(),
     ]);
   }
 }

@@ -1,0 +1,53 @@
+{% extends '/site/squelette.html.twig' %}
+{% block title %}
+  <title>{{ site.nomSite }}</title>
+{% endblock %}
+{% block styles %}
+  <link rel="stylesheet" href="css/bulma.min.css" />
+{% endblock %}
+
+{% block header %}
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{{ path('builder') }}"><img src="images/sitelogo.png" alt="Logo" /></a>
+          <span class="navbar-burger burger" data-target="navbarMenu"></span>
+        </div>
+
+        {% include 'site/sections/navigation.html.twig' %}
+      </div>
+    </nav>
+  </header>
+{% endblock %}
+
+{% block main %}
+  {% include 'site/sections/hero.html.twig' %}
+
+  {% if site.products is defined %}
+    {% include 'site/sections/produits.html.twig' %}
+  {% endif %}
+  {% if site.faq is defined %}
+    {% include 'site/sections/faq.html.twig' %}
+  {% endif %}
+{% endblock %}
+{% block footer %}
+  {% include 'site/sections/footer.html.twig' %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const themeColors = JSON.parse('{{ site.themeColors | json_encode | raw }}')
+    document.querySelectorAll('.is-primary').forEach((el) => {
+      el.style.backgroundColor = themeColors['primary']
+    })
+    //get is-secondary and set their background-color
+    document.querySelectorAll('.is-secondary').forEach((el) => {
+      el.style.backgroundColor = themeColors['secondary']
+    })
+    //get is-secondary and set their background-color
+    document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
+      el.style.color = themeColors['tertiary']
+    })
+  </script>
+{% endblock %}

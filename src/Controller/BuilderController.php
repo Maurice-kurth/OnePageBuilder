@@ -76,7 +76,7 @@ class BuilderController extends AbstractController
     public function showSite(SiteWeb $siteWeb): Response
     {
 
-        return $this->render('builder/show.html.twig', [
+        return $this->render('site/preview.html.twig', [
             'site' => $siteWeb,
         ]);
     }

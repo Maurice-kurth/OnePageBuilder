@@ -27,3 +27,6 @@ services:
     App\Service\FtpService:
         arguments:
             $local_websites_dir: "%local_websites_dir%"
+    App\Service\OnePageCreatorService:
+        arguments:
+             $local_websites_dir: "%local_websites_dir%"
