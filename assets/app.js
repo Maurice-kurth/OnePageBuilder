@@ -11,11 +11,11 @@ import "./styles/app.css";
 // start the Stimulus application
 import "./bootstrap";
 
-import "./js/forms.js";
+//import "./js/forms.js";
 
 import { createApp } from "vue";
 import DefaultApp from "./js/DefaultApp.vue";
 import BuilderForm from "./js/BuilderForm.vue";
 
-createApp(DefaultApp).mount("#vue-app");
+//createApp(DefaultApp).mount("#vue-app");
 createApp(BuilderForm).mount("#vue-builder-form");

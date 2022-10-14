@@ -1,7 +1,7 @@
 <template>
   <!-- début infos générales -->
   <section class="infos-site">
-    <h3>Informations générales</h3>
+    <h3>1 - Informations générales</h3>
     <div class="columns">
       <div class="column">
         <div class="field">
@@ -10,19 +10,25 @@
             <input
               class="input"
               type="text"
-              v-model="nomSite"
+              @input="ChildUpdateNomSite"
+              :value="nomSite"
               placeholder="Le nom de votre site"
             />
           </div>
         </div>
         <div class="field">
           <label class="label">Logo du site</label>
-          <div class="control">
-            <input
-              class="input"
-              @change="handleLogoUpload($event)"
-              type="file"
-            />
+          <div class="control is-flex is-align-items-center">
+            <div class="form-logo--input">
+              <input
+                class="input"
+                @change="ChildHandleLogoUpload"
+                type="file"
+              />
+            </div>
+            <div class="form-logo--container mx-4">
+              <img :src="siteLogo" alt="logo du site" />
+            </div>
           </div>
         </div>
       </div>
@@ -34,15 +40,17 @@
 <script>
 export default {
   name: "InfosGenerales",
-  data() {
-    return {
-      nomSite: "",
-      logoSite: "",
-    };
+  props: {
+    nomSite: String,
+    siteLogo: String,
   },
   methods: {
-    handleLogoUpload(event) {
-      this.logoSite = event.target.files[0];
+    ChildUpdateNomSite(event) {
+      this.$emit("update-nomSite", event.target.value);
+    },
+    ChildHandleLogoUpload(event) {
+      let uploadedLogo = event.target.files[0];
+      this.$emit("logo-upload", uploadedLogo);
     },
   },
 };

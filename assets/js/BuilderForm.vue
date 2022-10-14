@@ -4,116 +4,45 @@
     <p>{{ monMessage }}</p>
     <div class="vue-form my-4">
       <form @submit.prevent="formSubmit">
-        <!-- début infos générales -->
-        <section class="infos-site">
-          <h3>Informations générales</h3>
-          <div class="columns">
-            <div class="column">
-              <div class="field">
-                <label class="label">Nom de votre Site</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    v-model="nomSite"
-                    placeholder="Le nom de votre site"
-                  />
-                </div>
-              </div>
-              <div class="field">
-                <label class="label">Logo du site</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    @change="handleLogoUpload($event)"
-                    type="file"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- fin infos générales -->
+        <InfosGenerales :nomSite="nomSite"
+          :siteLogo="siteLogo ? temporaryLogoUrl : previousLogo"
+          @update-nomSite="updateNomSite" @logo-upload="handleLogoUpload" />
         <section class="infos-header">
-          <h3>Bandeau héros et thème</h3>
-          <div class="columns">
-            <div class="column">
-              <div class="field">
-                <label class="label">Petite présentation de votre site</label>
-                <div class="control">
-                  <input
-                    class="textarea"
-                    type="textarea"
-                    v-model="presentationSite"
-                    placeholder="Tagline de votre site ..."
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Color Picker -->
-          <div class="is-flex colorPicker-column">
-            <div class="colorPicker-container">
-              <div class="colorPicker-color darkBlue"></div>
-              <input
-                name="themeColor"
-                type="radio"
-                v-model="themeColors"
-                value="#000000,#150050,#3F0071"
-              />
-            </div>
-            <div class="colorPicker-container">
-              <div class="colorPicker-color pink"></div>
-              <input
-                name="themeColor"
-                type="radio"
-                v-model="themeColors"
-                value="#F07DEA,#A460ED,#9FC9F3"
-              />
-            </div>
-          </div>
+          <h3>2 - Bandeau héros et thème</h3>
+          <HeroSection :presentationSite="presentationSite"
+            @update-presentationSite="updatePresentationSite" />
+          <ThemeColorPicker :themeColors="themeColors"
+            :baseThemeColors="baseThemeColors"
+            @update-themeColors="updateThemeColors" />
+
         </section>
         <!-- Section Produits -->
         <section class="infos-produits">
-          <span class="columns is-align-items-center">
-            <input type="checkbox" name="activated" />
-            <label for="activated">Activé</label>
-            <h3>Produits</h3>
-          </span>
+          <div class="is-flex is-align-items-center">
+            <h3 class="mx-4">Produits</h3>
+            <input type="checkbox" name="activated" /> <label
+              for="activated">Activé</label>
+          </div>
 
           <div class="columns is-multiline">
             <div v-for="product in products" class="column is-one-quarter">
               <div class="field">
                 <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    v-model="product.name"
-                    placeholder="Nom du produit"
-                  />
-                  <input
-                    class="input"
-                    type="text"
-                    v-model="product.price"
-                    placeholder="prix du produit"
-                  />
+                  <input class="input" type="text" v-model="product.name"
+                    placeholder="Nom du produit" />
+                  <input class="input" type="text" v-model="product.price"
+                    placeholder="prix du produit" />
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <button
-              type="button"
-              class="button is-info mr-4"
-              @click="addProduct"
-            >
+            <button type="button" class="button is-info mr-4"
+              @click="addProduct">
               Ajouter un produit
             </button>
-            <button
-              type="button"
-              class="button is-danger"
-              @click="removeProduct"
-            >
+            <button type="button" class="button is-danger"
+              @click="removeProduct">
               Supprimer un produit
             </button>
           </div>
@@ -138,7 +67,15 @@
 </template>
 <script>
 import axios from "axios";
+import InfosGenerales from "./FormSections/InfosGenerales.vue";
+import HeroSection from "./FormSections/HeroSection.vue";
+import ThemeColorPicker from "./FormSections/ThemeColorPicker.vue";
 export default {
+  components: {
+    InfosGenerales,
+    HeroSection,
+    ThemeColorPicker,
+  },
   data() {
     return {
       monMessage: "Hello from Vue !",
@@ -146,14 +83,31 @@ export default {
       nomSite: "",
       presentationSite: "",
       siteLogo: "",
+      temporaryLogoUrl: "",
+      previousLogo: "/images/uploads/adminlcdz/sitelogo.png",
       products: [
         {
-          name: "Produit 1",
-          price: 10,
+          name: "Produit 0",
+          price: 0,
+        },
+      ],
+      // themeColors is an array of objects with 2 properties: name (string) and colors: (array of strings)
+      baseThemeColors: [
+        {
+          name: "red",
+          colors: ["#f44336", "#e91e63", "#9c27b0"],
+        },
+        {
+          name: "orange",
+          colors: ["#ff9800", "#ffc107", "#ffeb3b"],
+        },
+        {
+          name: "lightblue",
+          colors: ["#2196f3", "#03a9f4", "#00bcd4"],
         },
       ],
       themeColors: "",
-      themeColorsArray: [],
+      pickedThemeColors: [],
     };
   },
   computed: {
@@ -163,13 +117,14 @@ export default {
   },
   watch: {
     themeColors: function (newVal, oldVal) {
-      this.themeColorsArray = newVal.split(",");
+      this.pickedThemeColors = newVal.split(",");
       //make themeColorsArray a named array with keys primary, secondary, tertiary
-      this.themeColorsArray = {
-        primary: this.themeColorsArray[0],
-        secondary: this.themeColorsArray[1],
-        tertiary: this.themeColorsArray[2],
+      this.pickedThemeColors = {
+        primary: this.pickedThemeColors[0],
+        secondary: this.pickedThemeColors[1],
+        tertiary: this.pickedThemeColors[2],
       };
+      console.log(this.pickedThemeColors);
     },
   },
   mounted() {
@@ -195,18 +150,29 @@ export default {
     removeProduct() {
       this.products.pop();
     },
-    handleLogoUpload(event) {
-      this.siteLogo = event.target.files[0];
-      console.log(this.siteLogo);
+    updateNomSite(nomSite) {
+      this.nomSite = nomSite;
+    },
+    handleLogoUpload(uploadedLogo) {
+      this.siteLogo = uploadedLogo;
+      this.temporaryLogoUrl = URL.createObjectURL(uploadedLogo);
+    },
+    updatePresentationSite(presentationSite) {
+      this.presentationSite = presentationSite;
+    },
+    updateThemeColors(newThemeColors) {
+      this.themeColors = newThemeColors;
     },
     formSubmit() {
       this.saveToDb();
     },
+    //Prepopulate form fields with data from API
     populateFieldsFromApi(data) {
       this.nomSite = data.nomSite;
       this.presentationSite = data.descriptionSite;
       this.products = data.products || this.products;
     },
+    //Database stuff
     saveToDb() {
       let formData = new FormData();
       if (this.siteLogo != null) {
@@ -215,7 +181,7 @@ export default {
       formData.append("nom_site", this.nomSite);
       formData.append("presentationSite", this.presentationSite);
       formData.append("products", JSON.stringify(this.products));
-      formData.append("themeColors", JSON.stringify(this.themeColorsArray));
+      formData.append("themeColors", JSON.stringify(this.pickedThemeColors));
       axios
         .post("/api/jsform", formData, {
           headers: {
