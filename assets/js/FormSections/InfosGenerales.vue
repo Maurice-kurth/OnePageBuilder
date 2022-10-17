@@ -7,27 +7,22 @@
         <div class="field">
           <label class="label">Nom de votre Site</label>
           <div class="control">
-            <input
-              class="input"
-              type="text"
-              @input="ChildUpdateNomSite"
-              :value="nomSite"
-              placeholder="Le nom de votre site"
-            />
+            <input required="required" class="input" type="text"
+              @input="ChildUpdateNomSite" :value="nomSite"
+              placeholder="Le nom de votre site" />
           </div>
         </div>
         <div class="field">
           <label class="label">Logo du site</label>
-          <div class="control is-flex is-align-items-center">
+          <div
+            class="control is-flex is-align-items-center is-flex-direction-column-reverse	">
             <div class="form-logo--input">
-              <input
-                class="input"
-                @change="ChildHandleLogoUpload"
-                type="file"
-              />
+              <input class="input" @change="ChildHandleLogoUpload"
+                type="file" />
             </div>
             <div class="form-logo--container mx-4">
-              <img :src="siteLogo" alt="logo du site" />
+              <img :src="siteLogoUrl ? siteLogo : siteLogoUrl "
+                alt="logo du site" />
             </div>
           </div>
         </div>
@@ -43,6 +38,12 @@ export default {
   props: {
     nomSite: String,
     siteLogo: String,
+    username: String,
+  },
+  computed: {
+    siteLogoUrl() {
+      return "/images/uploads/" + this.username + "/sitelogo.png";
+    }
   },
   methods: {
     ChildUpdateNomSite(event) {

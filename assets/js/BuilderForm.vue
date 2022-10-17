@@ -4,9 +4,12 @@
     <p>{{ monMessage }}</p>
     <div class="vue-form my-4">
       <form @submit.prevent="formSubmit">
-        <InfosGenerales :nomSite="nomSite"
+        <!-- Infos générales sur le site : Nom - Logo (url/fichier)  -->
+
+        <InfosGenerales :nomSite="nomSite" :username="username"
           :siteLogo="siteLogo ? temporaryLogoUrl : previousLogo"
           @update-nomSite="updateNomSite" @logo-upload="handleLogoUpload" />
+        <!-- Héro et Thème du site : Tagline - Couleurs du thème (array/string) -->
         <section class="infos-header">
           <h3>2 - Bandeau héros et thème</h3>
           <HeroSection :presentationSite="presentationSite"
@@ -16,38 +19,10 @@
             @update-themeColors="updateThemeColors" />
 
         </section>
-        <!-- Section Produits -->
-        <section class="infos-produits">
-          <div class="is-flex is-align-items-center">
-            <h3 class="mx-4">Produits</h3>
-            <input type="checkbox" name="activated" /> <label
-              for="activated">Activé</label>
-          </div>
+        <!--  Section Produits ou services : Produits (array) -->
+        <ProduitsSection :products="products" @remove-product="removeProduct"
+          @add-product="addProduct" />
 
-          <div class="columns is-multiline">
-            <div v-for="product in products" class="column is-one-quarter">
-              <div class="field">
-                <div class="control">
-                  <input class="input" type="text" v-model="product.name"
-                    placeholder="Nom du produit" />
-                  <input class="input" type="text" v-model="product.price"
-                    placeholder="prix du produit" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <button type="button" class="button is-info mr-4"
-              @click="addProduct">
-              Ajouter un produit
-            </button>
-            <button type="button" class="button is-danger"
-              @click="removeProduct">
-              Supprimer un produit
-            </button>
-          </div>
-        </section>
-        <!-- Fin Section Produits -->
 
         <!-- Envoi du formulaire -->
         <div style="margin-top: 30px" class="field">
@@ -61,6 +36,7 @@
             <a class="button is-success" :href="siteUrl">Voir le site </a>
           </div>
         </div>
+        <!-- Fin du formulaire -->
       </form>
     </div>
   </div>
@@ -70,11 +46,13 @@ import axios from "axios";
 import InfosGenerales from "./FormSections/InfosGenerales.vue";
 import HeroSection from "./FormSections/HeroSection.vue";
 import ThemeColorPicker from "./FormSections/ThemeColorPicker.vue";
+import ProduitsSection from "./FormSections/ProduitsSection.vue";
 export default {
   components: {
     InfosGenerales,
     HeroSection,
     ThemeColorPicker,
+    ProduitsSection,
   },
   data() {
     return {
@@ -83,8 +61,8 @@ export default {
       nomSite: "",
       presentationSite: "",
       siteLogo: "",
+      username: "",
       temporaryLogoUrl: "",
-      previousLogo: "/images/uploads/adminlcdz/sitelogo.png",
       products: [
         {
           name: "Produit 0",
@@ -92,19 +70,33 @@ export default {
         },
       ],
       // themeColors is an array of objects with 2 properties: name (string) and colors: (array of strings)
+      //Order of colors in the array is important, it will be used to generate the palette with :
+      // 1 = Primary color, 2 = Background color, 3 = Accent color
       baseThemeColors: [
         {
-          name: "red",
-          colors: ["#f44336", "#e91e63", "#9c27b0"],
+          name: "darkblue",
+          colors: ["#2b2d42", "#8d99ae", "#edf2f4"],
         },
         {
-          name: "orange",
-          colors: ["#ff9800", "#ffc107", "#ffeb3b"],
+          name: "DarkRed",
+          colors: ["#8c1c13", "#bf4342", "#e7d7c1"],
         },
         {
-          name: "lightblue",
-          colors: ["#2196f3", "#03a9f4", "#00bcd4"],
+          name: "DarkOliveGreen",
+          colors: ["#2c6e49", "#4c956c", "#fefee3"],
         },
+        {
+          name: "DarkSlateGray",
+          colors: ["#08090a", "#a7a2a9", "#f4f7f5"],
+        },
+        {
+          name: "Gold",
+          colors: ["#ffd100", "#ffee32", "#d6d6d6"],
+        },
+        {
+          name: "pink",
+          colors: ["#f5b7c7", "#f283b6", "#ffeef4"],
+        }
       ],
       themeColors: "",
       pickedThemeColors: [],
@@ -114,6 +106,9 @@ export default {
     siteUrl() {
       return "builder/site/" + this.nomSite;
     },
+    previousLogo() {
+      return "/images/uploads/" + this.username + "/sitelogo.png";
+    }
   },
   watch: {
     themeColors: function (newVal, oldVal) {
@@ -171,6 +166,7 @@ export default {
       this.nomSite = data.nomSite;
       this.presentationSite = data.descriptionSite;
       this.products = data.products || this.products;
+      this.username = data.username;
     },
     //Database stuff
     saveToDb() {

@@ -67,6 +67,7 @@ function getSiteInfo(Request $request, ManagerRegistry $doctrine)
         'descriptionSite' => $siteWeb->getDescriptionSite(),
         'themeColors' => $siteWeb->getThemeColors(),
         'products' => $siteWeb->getProducts(),
+        'username' => $siteWeb->getProprietaire()->getUsername(),
     ];
     return $this->json($siteWebArray);
 }
