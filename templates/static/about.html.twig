@@ -1,0 +1,110 @@
+{% extends 'static/static-base.html.twig' %}
+
+{% block title %}
+  OnePageBuilder : À propos
+{% endblock %}
+
+{% block body %}
+  <main class="static-content">
+    <div class="hero is-warning">
+      <div class="hero-body container">
+        <h1>OnePageBuilder, l'outil Alsacien du créateur d'entreprise</h1>
+      </div>
+    </div>
+    <section class="container">
+      <h2>Avec OPB, développez votre site professionnel en quelques clics</h2>
+
+      <p class="highlight">Utilisez le formulaire d'édition pour effectuer des modifications en temps réel sur votre site vitrine.</p>
+
+      <div class="article p-6">
+        <h3>L'éditeur de contenu qui s'adapte à vos besoins</h3>
+
+        <p>Sélectionnez les sections qui correspondent à votre site et ajoutez votre contenu en toute simplicité, aucune connaissance technique n'est nécessaire !</p>
+      </div>
+    </section>
+    <section class="container">
+      <div class="columns is-justify-content-center is-multiline">
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Choix du thème de couleurs</h4>
+          </div>
+        </article>
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Produits ou services</h4>
+          </div>
+        </article>
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Foire aux Questions</h4>
+          </div>
+        </article>
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Coordonnées et formulaire de contact</h4>
+          </div>
+        </article>
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Galerie de photos</h4>
+          </div>
+        </article>
+        <article class="card column m-4 is-3">
+          <div class="card-image">
+            <!-- placeholder image -->
+            <figure class="image is-3by2">
+              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Témoignages des clients</h4>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="container">
+      <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+        <h3>Comment y accéder ?</h3>
+
+        <p>
+          Le OnePageBuilder est un outil mis à disposition des créateurs d'entreprise passant par ... à .... <br />
+          Afin d'accéder à l'outil, vous aurez besoin d'entrer en contact avec votre conseiller chez ...
+        </p>
+
+        <p>Si vous possédez déja un compte, vous pouvez vous connecter ici</p>
+
+        <a href="{{ path('app_login') }}" class="button is-primary my-4">Se connecter</a>
+      </div>
+    </section>
+  </main>
+{% endblock %}

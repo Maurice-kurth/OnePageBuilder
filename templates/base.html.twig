@@ -20,40 +20,45 @@
   </head>
   <body>
     {% block header %}
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/logo_lcdz.jpeg" alt="Logo" /></a>
-            <span class="navbar-burger burger" data-target="navbarMenu"></span>
-          </div>
-          <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end">
-              <div class="tabs is-right">
-                <ul>
-                  <li class="">
-                    <a href="{{ path('builder') }}">Home</a>
-                  </li>
-                  <li>
-                    <a href="{{ path('builder_form_js') }}">Construire mon site</a>
-                  </li>
-                  {% if is_granted('ROLE_USER') %}
-                    <li style="font-size:1.2rem;">
-                      <a href="{{ path('app_profile') }}"><i class="fa-solid fa-circle-user"></i></a>
+      <header>
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/logo_lcdz.jpeg" alt="Logo" /></a>
+              <span class="navbar-burger burger" data-target="navbarMenu"></span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="tabs is-right">
+                  <ul>
+                    <li class="">
+                      <a href="{{ path('builder') }}">Home</a>
                     </li>
                     <li>
-                      <a href="{{ path('app_logout') }}">Déconnexion</a>
+                      <a href="{{ path('a_propos') }}">À propos</a>
                     </li>
-                  {% else %}
                     <li>
-                      <a href="{{ path('app_login') }}">Connexion</a>
+                      <a href="{{ path('builder_form_js') }}">Construire mon site</a>
                     </li>
-                  {% endif %}
-                </ul>
+                    {% if is_granted('ROLE_USER') %}
+                      <li style="font-size:1.2rem;">
+                        <a href="{{ path('app_profile') }}"><i class="fa-solid fa-circle-user"></i></a>
+                      </li>
+                      <li>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                      </li>
+                    {% else %}
+                      <li>
+                        <a href="{{ path('app_login') }}">Connexion</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
     {% endblock %}
     {% block body %}
       {% block pagetitle %}
