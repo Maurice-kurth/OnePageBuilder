@@ -21,29 +21,38 @@
   <body>
     {% block header %}
       <header>
-        <nav class="navbar">
+        <nav class="navbar" aria-label="main-navigation" role="navigation">
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/logo_lcdz.jpeg" alt="Logo" /></a>
-              <span class="navbar-burger burger" data-target="navbarMenu"></span>
+              <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
             </div>
-            <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-menu" id="navMenu">
               <div class="navbar-end">
-                <div class="tabs is-right">
+                <div class="tabs">
                   <ul>
                     <li class="">
-                      <a href="{{ path('builder') }}">Home</a>
+                      <a href="{{ path('builder') }}">Accueil</a>
+                    </li>
+                    <li>
+                      <a href="{{ path('app_blog') }}">Blog</a>
                     </li>
                     <li>
                       <a href="{{ path('a_propos') }}">À propos</a>
                     </li>
-                    <li>
-                      <a href="{{ path('builder_form_js') }}">Construire mon site</a>
-                    </li>
                     {% if is_granted('ROLE_USER') %}
-                      <li style="font-size:1.2rem;">
-                        <a href="{{ path('app_profile') }}"><i class="fa-solid fa-circle-user"></i></a>
+                      <li>
+                        <a href="{{ path('builder_form_js') }}"><b>Construire mon site</b></a>
                       </li>
+
+                      <li>
+                        <a href="{{ path('app_profile') }}">{{ user.username|default('') }} <i class="mx-2 fa-solid fa-circle-user"></i></a>
+                      </li>
+
                       <li>
                         <a href="{{ path('app_logout') }}">Déconnexion</a>
                       </li>

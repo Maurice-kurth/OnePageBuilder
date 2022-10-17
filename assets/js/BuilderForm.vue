@@ -1,5 +1,5 @@
 <template>
-  <div class="card container article p-3 my-6">
+  <div class="card container article px-4 py-4 my-6">
     <h2>Formulaire pour les informations de votre site web</h2>
     <p>{{ monMessage }}</p>
     <div class="vue-form my-4">

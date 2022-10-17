@@ -12,6 +12,7 @@ import "./styles/app.css";
 import "./bootstrap";
 
 //import "./js/forms.js";
+import "./js/mobilemenu.js";
 
 import { createApp } from "vue";
 import DefaultApp from "./js/DefaultApp.vue";

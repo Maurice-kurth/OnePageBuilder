@@ -19,7 +19,7 @@ class JsBuilderController extends AbstractController
 function renderJsForm()
     {
     $view = $this->renderView('/js_builder/jsbuilder.html.twig', [
-        'phphello' => 'Hello from PHP',
+      
     ]);
     return new Response($view);
 }

@@ -36,6 +36,8 @@ class LoginController extends AbstractController
         return $this->redirectToRoute('builder_form_js');
     }
 
+   
+
     #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout()
     {

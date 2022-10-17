@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220915125951 extends AbstractMigration
+final class Version20221017111524 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,16 +20,12 @@ final class Version20220915125951 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user ADD siteweb_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649B07A7BD4 FOREIGN KEY (siteweb_id) REFERENCES site_web (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649B07A7BD4 ON user (siteweb_id)');
+        $this->addSql('CREATE TABLE blog_post (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT DEFAULT NULL, created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649B07A7BD4');
-        $this->addSql('DROP INDEX UNIQ_8D93D649B07A7BD4 ON user');
-        $this->addSql('ALTER TABLE user DROP siteweb_id');
+        $this->addSql('DROP TABLE blog_post');
     }
 }

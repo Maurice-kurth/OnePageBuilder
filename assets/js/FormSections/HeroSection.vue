@@ -5,8 +5,8 @@
       <div class="field">
 
         <div class="control">
-          <input class="textarea" type="textarea" :value="presentationSite"
-            @change="ChildUpdatePresentationSite"
+          <input class="textarea" type="textarea" rows="5" cols="33"
+            :value="presentationSite" @change="ChildUpdatePresentationSite"
             placeholder="Tagline de votre site ..." />
         </div>
       </div>

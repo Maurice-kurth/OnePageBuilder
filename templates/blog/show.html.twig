@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <main class="container">
+    <a href="{{ path('app_blog') }}" class="button is-info">Retour aux articles</a>
+    <h1>{{ post.title }}</h1>
+
+    <section class="main-content">{{ post.content|raw }}</section>
+
+    <p>Publié le : {{ post.createdAt|date('d M Y ') }}</p>
+  </main>
+{% endblock %}

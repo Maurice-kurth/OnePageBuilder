@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\SiteWeb;
 use Symfony\Component\Security\Core\Security;
-
+use Monolog\DateTimeImmutable;
 //Ce Service permet de créer un site web à partir des données du formulaire
 //Il est appelé à partir du Controller JsBuilderController (en POST)
 //Il récupère $data qui est un FormData avec des variables (String, tableaux, objets) et des fichiers (fileType)
@@ -30,6 +30,7 @@ class OnePageCreatorService
 
         if ($siteWeb == null) {
             $siteWeb = new SiteWeb();
+            $siteWeb->setProprietaire($user);
             $siteWeb->setCreatedAt(new DateTimeImmutable('now'));
         }
 
