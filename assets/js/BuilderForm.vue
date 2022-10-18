@@ -95,7 +95,7 @@ export default {
         },
         {
           name: "pink",
-          colors: ["#f5b7c7", "#f283b6", "#ffeef4"],
+          colors: ["#ffeef4", "#f283b6", "#f5b7c7"],
         }
       ],
       themeColors: "",
