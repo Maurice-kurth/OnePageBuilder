@@ -14,6 +14,8 @@ import "./bootstrap";
 //import "./js/forms.js";
 import "./js/mobilemenu.js";
 
+import "./js/onepagescripts.js";
+
 import { createApp } from "vue";
 import DefaultApp from "./js/DefaultApp.vue";
 import BuilderForm from "./js/BuilderForm.vue";

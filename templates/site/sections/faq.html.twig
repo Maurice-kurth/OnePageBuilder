@@ -1,0 +1,20 @@
+<section id="faq" class="container faq-section my-6 px-2">
+  <div class="faq-title has-text-centered">
+    <h2>Foire aux questions</h2>
+  </div>
+  <article class="faq-content container is-max-desktop">
+    {% for faqItem in site.faq %}
+      <div class="faq-item">
+        <div class="faq-question is-flex is-align-items-center is-justify-content-space-between">
+          <h3>{{ faqItem.question }}</h3>
+          <div>
+            <i class="fas fa-caret-down"></i>
+          </div>
+        </div>
+        <div class="faq-answer">
+          <p>{{ faqItem.reponse }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </article>
+</section>

@@ -2,14 +2,18 @@
   <div class="navbar-end">
     <div class="tabs is-right">
       <ul>
+        {% if site.products is defined %}
+          <li>
+            <a href="#produits">Produits</a>
+          </li>
+        {% endif %}
+        {% if site.faq is defined %}
+          <li>
+            <a href="#faq">FAQ</a>
+          </li>
+        {% endif %}
         <li class="">
-          <a href="{{ path('builder') }}">Votre lien 1</a>
-        </li>
-        <li>
-          <a href="{{ path('builder_form_js') }}">Votre lien 2</a>
-        </li>
-        <li>
-          <a href="{{ path('app_register') }}">Votre lien 3</a>
+          <a href="#contact">Contact</a>
         </li>
       </ul>
     </div>

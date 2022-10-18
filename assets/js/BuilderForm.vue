@@ -23,11 +23,14 @@
         <ProduitsSection :products="products" @remove-product="removeProduct"
           @add-product="addProduct" />
 
-
+        <!-- Section FAQ -->
+        <FaqSection :faqElements="faqElements" @add-question="addFaqQuestion"
+          @remove-question="removeFaqQuestion" />
         <!-- Envoi du formulaire -->
         <div style="margin-top: 30px" class="field">
           <p class="control">
-            <button type="submit" class="button is-info">Valider</button>
+            <button type="submit" class="button is-info">Enregistrer les
+              modifications</button>
           </p>
           <div v-if="successMessage">
             <p>
@@ -47,12 +50,14 @@ import InfosGenerales from "./FormSections/InfosGenerales.vue";
 import HeroSection from "./FormSections/HeroSection.vue";
 import ThemeColorPicker from "./FormSections/ThemeColorPicker.vue";
 import ProduitsSection from "./FormSections/ProduitsSection.vue";
+import FaqSection from "./FormSections/FaqSection.vue";
 export default {
   components: {
     InfosGenerales,
     HeroSection,
     ThemeColorPicker,
     ProduitsSection,
+    FaqSection,
   },
   data() {
     return {
@@ -63,6 +68,13 @@ export default {
       siteLogo: "",
       username: "",
       temporaryLogoUrl: "",
+      faqElements: [
+        {
+          question: "Q1",
+          reponse: "R1",
+          isClosed: false
+        },
+      ],
       products: [
         {
           name: "Produit 0",
@@ -122,7 +134,7 @@ export default {
       console.log(this.pickedThemeColors);
     },
   },
-  mounted() {
+  created() {
     //Utiliser avec AJAX une route contenant en JSON  les données du site de la BDD pour prépeupler le formulaire
     console.log("Vuejs monté");
     axios
@@ -144,6 +156,12 @@ export default {
     },
     removeProduct() {
       this.products.pop();
+    },
+    addFaqQuestion() {
+      this.faqElements.push({ question: "", reponse: "", isClosed: false });
+    },
+    removeFaqQuestion() {
+      this.faqElements.pop();
     },
     updateNomSite(nomSite) {
       this.nomSite = nomSite;
@@ -167,6 +185,7 @@ export default {
       this.presentationSite = data.descriptionSite;
       this.products = data.products || this.products;
       this.username = data.username;
+      this.faqElements = data.faq || this.faqElements;
     },
     //Database stuff
     saveToDb() {
@@ -178,6 +197,7 @@ export default {
       formData.append("presentationSite", this.presentationSite);
       formData.append("products", JSON.stringify(this.products));
       formData.append("themeColors", JSON.stringify(this.pickedThemeColors));
+      formData.append("faq", JSON.stringify(this.faqElements));
       axios
         .post("/api/jsform", formData, {
           headers: {

@@ -47,17 +47,18 @@
   {% if site.faq is defined %}
     {% include 'site/sections/faq.html.twig' %}
   {% endif %}
+
+  {% include 'site/sections/contact.html.twig' %}
 {% endblock %}
 {% block footer %}
   {% include 'site/sections/footer.html.twig' %}
-  <a href="{{ path('app_logout') }}" class="button">Déconnexion <i class="ml-2 fas fa-power-off"></i></a>
 {% endblock %}
 
 {% block scripts %}
   <script>
     const themeColors = JSON.parse('{{ site.themeColors | json_encode | raw }}')
     document.querySelectorAll('.is-primary').forEach((el) => {
-      el.style.backgroundColor = themeColors['primary']
+      el.style.backgroundColor = themeColors['tertiary']
     })
     //get is-secondary and set their background-color
     document.querySelectorAll('.is-secondary').forEach((el) => {
@@ -65,7 +66,7 @@
     })
     //get is-secondary and set their background-color
     document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
-      el.style.color = themeColors['tertiary']
+      el.style.color = themeColors['primary']
     })
   </script>
 {% endblock %}

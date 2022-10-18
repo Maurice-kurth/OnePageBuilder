@@ -154,4 +154,44 @@ h3 {
             flex-direction: column;
   }
 }
+
+/** Onepage styles (Need to be transferred with the folder) **/
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+.faq-question {
+  cursor: pointer;
+}
+
+.faq-answer {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 1s cubic-bezier(0, 1, 0, 1), opacity 0.5s;
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1), opacity 0.5s;
+}
+
+.faq-answer.show {
+  opacity: 1;
+  max-height: 500px;
+  -webkit-transition: max-height 1s ease-in-out;
+  transition: max-height 1s ease-in-out;
+}
+
+.faq-item:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #D0D1CD;
+  margin-top: 0rem;
+}
+
+/** contact section**/
+.contact-section {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
 /*# sourceMappingURL=app.css.map */

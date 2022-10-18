@@ -85,21 +85,19 @@ class OnePageCreatorService
         //Section Produits ou Services
         $siteProducts = json_decode($data['products'], true) ?? [['name' => 'Product manquant', 'price' => 0, 'weight' => 1.6]];
 
-        //Section Contact
-
+        //Section FAQ
+        $siteFAQ = json_decode($data['faq'], true) ?? [['question' => 'Question vide', 'reponse' => 'Réponse vide']];
 
         //Create a .txt file in the destination folder and write the data in it
         $file = fopen($destination . 'siteinfo.txt', 'w');
-        fwrite($file, $siteName . "\n" . "\r");
-        //Write the current time in the file
-        fwrite($file,'Mis à jour le : '.date('d/m/Y H:i:s'));
+        fwrite($file, $siteName . "\n" . "\r" . 'Mis à jour le : '.date('d/m/Y H:i:s'));
         fclose($file);
 
         //exécuter la fonction qui va créer le site web
-        return ($this->setWebsiteData($siteName, $siteDescription, $siteThemeColors, $siteProducts));
+        return ($this->setWebsiteData($siteName, $siteDescription, $siteThemeColors, $siteProducts, $siteFAQ));
     }
 
-    public function setWebsiteData($siteName, $siteDescription, $siteThemeColors, $siteProducts)
+    public function setWebsiteData($siteName, $siteDescription, $siteThemeColors, $siteProducts, $siteFAQ)
     {
 
         $user = $this->security->getUser();
@@ -117,6 +115,8 @@ class OnePageCreatorService
         //Set products of siteweb as an array of arrays
         $siteWeb->setProducts($siteProducts);
 
+        //Set FAQ of siteweb as an array of arrays
+        $siteWeb->setFaq($siteFAQ);
         return $siteWeb;
     }
 

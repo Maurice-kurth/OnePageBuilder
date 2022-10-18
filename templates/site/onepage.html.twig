@@ -30,6 +30,10 @@
   {% if site.faq is defined %}
     {% include 'site/sections/faq.html.twig' %}
   {% endif %}
+
+  {% if site.contact is defined %}
+    {% include 'site/sections/contact.html.twig' %}
+  {% endif %}
 {% endblock %}
 {% block footer %}
   {% include 'site/sections/footer.html.twig' %}
@@ -43,11 +47,11 @@
     })
     //get is-secondary and set their background-color
     document.querySelectorAll('.is-secondary').forEach((el) => {
-      el.style.backgroundColor = themeColors['secondary']
+      el.style.backgroundColor = themeColors['tertiary']
     })
     //get is-secondary and set their background-color
     document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
-      el.style.color = themeColors['tertiary']
+      el.style.color = themeColors['secondary']
     })
   </script>
 {% endblock %}
