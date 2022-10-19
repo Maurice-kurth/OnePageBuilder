@@ -72,12 +72,16 @@ class BuilderController extends AbstractController
     }
    
 
-    #[Route('/builder/site/{nom_site}', name: 'builder_show', methods: ['GET'])]
-    public function showSite(SiteWeb $siteWeb): Response
+    #[Route('/builder/site/{nom_site}', name: 'builder_show', methods: ['GET'] )]
+    public function showSite(SiteWeb $siteWeb, Request $request): Response
     {
 
+        //get url parameter siteSaved
+        $siteSaved = $request->query->get('siteSaved');
         return $this->render('site/preview.html.twig', [
             'site' => $siteWeb,
+            'siteSaved' => $siteSaved,
+            'sitePublished' => false,
         ]);
     }
 

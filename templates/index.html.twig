@@ -1,38 +1,44 @@
 {% extends './base.html.twig' %}
 {% block body %}
-  <section class="hero is-fullheight is-default is-bold">
-    <div class="hero-head"></div>
+  <section class="hero is-halfheight is-default is-bold">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="columns is-vcentered">
+        <div class="columns">
           <div class="column is-5">
             <figure class="image is-4by3">
-              <img src="/images/poulain_zebre.jpg" alt="Description" />
+              {# <img src="/images/poulain_zebre.jpg" alt="Image Héros du site" /> #}
+              <img src="{{ asset('images/undraw_customization.svg') }}" alt="Image Héros du site" />
             </figure>
           </div>
           <div class="column is-6 is-offset-1">
-            <h1 class="title is-2">OnePageBuilder</h1>
-            <h2 class="subtitle is-4">{{ message }}</h2>
+            <h1 class="is-size-1">OnePageBuilder</h1>
+            <h2 class="subtitle is-size-4">{{ message }}</h2>
+
             <br />
             <p class="has-text-centered">
-              <a class="button is-medium is-info" href="{{ path('builder_form_js') }}">Créer mon Onepage</a>
-              <a class="button is-medium is-info is-outlined" href="{{ path('app_register') }}">Inscription</a>
+              <a class="button is-medium is-info my-2" href="{{ path('builder_form_js') }}">Créer mon Onepage</a>
+              <a class="button is-medium is-outlined my-2" href="{{ path('app_register') }}">Inscription</a>
             </p>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="hero-foot">
-      <div class="container">
-        <div class="tabs is-centered">
-          <ul>
-            <li>
-              <a>And this is the bottom</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </section>
+  <h2 class="has-text-centered my-6">Créez facilement un site web professionnel !</h2>
+  <section class="accueil-readmore is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+    <article class="columns is-align-items-center is-justify-content-center is-3 mx-4 has-text-centered container">
+      <div class="message column is-one-third-desktop is-align-self-stretch is-info is-size-3 p-4 my-6 mx-2">
+        <p>Sans compétences techniques particulières</p>
+      </div>
+      <div class="message column is-one-third-desktop is-align-self-stretch is-primary is-size-3 p-4 my-6 mx-2">
+        <p>Avec un outil intuitif de création de site web</p>
+      </div>
+      <div class="message column is-one-third-desktop is-align-self-stretch is-secondary is-size-3 p-4 my-6 mx-2">
+        <p>En Collaboration avec le pack digital Alsace</p>
+      </div>
+    </article>
+  </section>
+  <p class="has-text-centered my-6">
+    <a href="{{ path('a_propos') }}" class="button is-dark is-size-4">En savoir plus</a>
+  </p>
 {% endblock %}

@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
-class EditUserType extends AbstractType
+class EditServerType extends AbstractType
 {
 
     private $security; 
@@ -33,7 +33,6 @@ class EditUserType extends AbstractType
         $user = $this->security->getUser();
 
 
-        $builder->add('username');
         $builder->add('ftp_host', TextType::class, array('mapped' => false,'attr' => ['value'=> $user->getServerInfo()->getFtpHost()]));
         $builder->add('ftp_user', TextType::class, array('mapped' => false, 'attr' => ['value'=> $user->getServerInfo()->getFtpUser()] ));
         $builder->add('ftp_pass', PasswordType::class, array('mapped' => false, 'attr' => ['type' => 'password', 'value'=> $user->getServerInfo()->getFtpPass()] ));

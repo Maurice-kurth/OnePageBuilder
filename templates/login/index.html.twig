@@ -1,12 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-  {% endif %}
-
-  <div class="container has-text-centered my-6">
-    <div class="hero is-info">
+  <div class="has-text-centered my-6">
+    <div class="hero is-info container">
       <div class="hero-body">
         <h1 class="title">Connectez-vous pour accéder à votre compte et site web</h1>
       </div>
@@ -14,18 +10,20 @@
       <div class="is-justify-content-center is-flex p-6">
         <form action="{{ path('app_login') }}" method="post">
           <div class="field">
-            <label class="label" for="username">Utilisateur</label>
+            <label class="label has-text-white" for="username">Utilisateur</label>
             <div class="control">
               <input class="input" type="text" id="username" name="_username" value="{{ last_username }}" />
             </div>
           </div>
           <div class="field">
-            <label class="label" for="password">Mot de passe:</label>
+            <label class="label has-text-white" for="password">Mot de passe:</label>
             <div class="control">
               <input class="input" type="password" id="password" name="_password" />
             </div>
           </div>
-
+          {% if error %}
+            <p class="my-4">Identifiants erronés, veuillez réessayer</p>
+          {% endif %}
           {# Protection #}
           <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
           <div class="control">

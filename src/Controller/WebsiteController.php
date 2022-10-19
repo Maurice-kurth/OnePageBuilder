@@ -32,6 +32,7 @@ class WebsiteController extends AbstractController
     //read the content of the file
     return $this->render('ftp/sent.html.twig', [
       'file' => $file,
+      'user' => $user,
     ]);
   }
 
@@ -57,6 +58,7 @@ class WebsiteController extends AbstractController
     return $this->redirectToRoute('builder_show', [
       'site' => $siteWeb,
       'nom_site' => $siteWeb->getNomSite(),
+      'siteSaved' => true,
     ]);
   }
 }

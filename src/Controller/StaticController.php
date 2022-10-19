@@ -9,9 +9,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class StaticController extends AbstractController
 {
     #[Route('/a-propos', name: 'a_propos')]
-    public function index(): Response
+    public function apropos(): Response
     {
         return $this->render('static/about.html.twig', [
+        ]);
+    }
+    #[Route('/mentions-legales', name: 'mentions_legales')]
+    public function mentionsLegales(): Response
+    {
+        return $this->render('static/mentions.html.twig', [
         ]);
     }
 }

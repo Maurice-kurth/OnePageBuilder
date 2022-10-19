@@ -21,49 +21,74 @@ class FtpService
     {
 
         $user = $this->security->getUser();
-        $miniSiteDir = $this->local_websites_dir . '/userwebsites/' .$user->getUsername() ;
+        $miniSiteDir = $this->local_websites_dir . '\userwebsites\\' .$user->getUsername() ;
       
-
-        /*$ftp_host = "ssh.cluster010.hosting.ovh.net";
-        $ftp_user = "lacouleu";
-        $ftp_pass = "RemiZCEF";*/
-
-
         //full path on local = "F:/wamp64/www/LCDZ/OnePage/onepage/userwebsites/username";
        
 
-        $file = $miniSiteDir . '/index.html';
+        $OnePageFilesDirectory = $miniSiteDir . '/*';
 
-        $remote_server_dir = 'maurice/minisites';
+        $htmlFile = $miniSiteDir . '\index.html';
+        $cssFile = $miniSiteDir . '\bulma.min.css';
+        $cssFolder = $miniSiteDir . '\css';
+        $imageFolder = $miniSiteDir . '\images';
 
+       // $remote_server_dir = 'maurice/minisites';
+        $remote_server_dir = '';
         //Connect to FTP server using the credentials
         $ftp_connection = ftp_connect($ftp_host) or die("Could not connect to $ftp_host");
         ftp_login($ftp_connection, $ftp_user, $ftp_pass) or die("Could not login as $ftp_user");
         ftp_pasv($ftp_connection, true);
 
-        //Check if the file exists already on the server
+        //Files already on the server
         $files_on_server = ftp_nlist($ftp_connection, $remote_server_dir);
 
-
-        if (!in_array($file, $files_on_server)) {
-            echo "Le fichier $file n'existe pas sur le serveur, on le transfère" . "<br>";
-            //Put the file in the remote server directory
-            if (ftp_put($ftp_connection, $remote_server_dir . '/' . $file, $miniSiteDir . '/' . $file, FTP_BINARY)) {
-                echo "Transfert du fichier $file terminé" . "<br>";
-            } else {
-                echo "Erreur lors du transfert du fichier $file" . "<br>";
-            }
+    
+      
+        //Create a /css folder on the server
+        if(!in_array('css', $files_on_server)){
+            ftp_mkdir($ftp_connection, $remote_server_dir . '/css');
+        }else{
+            //Do nothing
+        }
+        //Permissions for the CSS folder
+         $permissions =  ftp_chmod($ftp_connection,0775,  $remote_server_dir . '/css');
+   
+   
+      
+        //Upload $htmlFile to the server
+        if (ftp_put($ftp_connection, $remote_server_dir . '/index.html', $htmlFile, FTP_BINARY)) {
+           // echo "Successfully uploaded $htmlFile to $ftp_host as $remote_server_dir/index.html" . '<br/>';
         } else {
-            echo "Le fichier $file existe déjà sur le serveur, il a été mis à jour" . "<br>";
+            //echo "Error uploading $htmlFile to $ftp_host";
+        }
+      
+
+   
+    
+       
+        //Upload each file in $cssFolder to the server in the /css folder
+        foreach (glob($cssFolder . '/*') as $file) {
+            if (ftp_put($ftp_connection, $remote_server_dir . '/css/' . basename($file), $file, FTP_BINARY)) {
+             //   echo "Successfully uploaded $file to $ftp_host as $remote_server_dir/css/" . basename($file) . '<br/>';
+            } else {
+               // echo "Error uploading $file to $ftp_host";
+            }
         }
 
-        ftp_put($ftp_connection, $remote_server_dir . '/' . $file, $miniSiteDir . '/' . $file, FTP_BINARY);
-        //close
+        
+        
+        //Close the FTP connection
         ftp_close($ftp_connection);
 
-        $file_contents = file_get_contents($miniSiteDir . '/' . $file);
+     //   return $remote_server_dir;
 
-        return $file_contents;
+     
+        //$file_contents = file_get_contents($miniSiteDir . '/' . $OnePagefilesDirectory);
+
+       // return $file_contents;
+
+       return 'ok';
     }
 
     public function saveFile($renderedFile, $nomFichier)
@@ -82,9 +107,12 @@ class FtpService
 
         //copy the onepagestyles.css file to the user folder
         copy($this->local_websites_dir . '/userwebsites/default/onepagestyles.css', $miniSiteDir . '/css/defaultStyle.css');
+        //set the file permission to 777
+        chmod($miniSiteDir . '/css/defaultStyle.css', 0777);
         //copy minBulma.css to the user folder
         copy($this->local_websites_dir . '/userwebsites/default/defaultBulma.min.css', $miniSiteDir . '/css/bulma.min.css');
-
+        //set the file permission to 777
+        chmod($miniSiteDir . '/css/bulma.min.css', 0777);
         return $renderedFile;
     }
 }

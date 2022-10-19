@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <div class="container text-center">
-    <p>Le fichier a été envoyé !</p>
-    <p>
-      Voici votre site <i class="fas fa-down"></i>
-    </p>
-  </div>
-  {{ file|raw }}
+  <main class="container has-text-centered">
+    <h1>Votre site a été publié !</h1>
+    <p>Votre site est disponible sur votre domaine web en .alsace</p>
+    <div class="my-4">
+      <p>Vous pouvez également voir l'aperçu ici :</p>
+
+      <a class="button is-primary my-4" href="{{ path('builder_show', { nom_site: user.siteweb.nomSite }) }}">Aperçu du site</a>
+    </div>
+  </main>
 {% endblock %}

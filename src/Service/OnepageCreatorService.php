@@ -76,7 +76,7 @@ class OnePageCreatorService
             //save $siteLogo to $destination folder
            // move_uploaded_file( $siteLogo, $destination_root."/sitelogo.png");
            move_uploaded_file( $siteLogo, $destination."/images/sitelogo.png");
-           copy($destination."/images/sitelogo.png", $destination_root."/sitelogo.png");
+           copy($destination."images/sitelogo.png", $destination_root."/sitelogo.png");
         }
 
         //Section Design et Thème

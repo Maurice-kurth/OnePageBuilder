@@ -2,9 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
       {% block title %}
-        Welcome to OnePage Builder !
+        Bienvenue sur OnePageBuilder !
       {% endblock %}
     </title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
@@ -24,7 +25,7 @@
         <nav class="navbar" aria-label="main-navigation" role="navigation">
           <div class="container">
             <div class="navbar-brand">
-              <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/logo_lcdz.jpeg" alt="Logo" /></a>
+              <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/logo_lcdz.jpeg" alt="Logo LCDZ" /></a>
               <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -58,7 +59,7 @@
                       </li>
                     {% else %}
                       <li>
-                        <a href="{{ path('app_login') }}">Connexion</a>
+                        <a class="button is-info ml-2" href="{{ path('app_login') }}">Connexion</a>
                       </li>
                     {% endif %}
                   </ul>
@@ -71,11 +72,33 @@
     {% endblock %}
     {% block body %}
       {% block pagetitle %}
-        <h1>Titre de ma page</h1>
+        <h1>Titre</h1>
       {% endblock %}
     {% endblock %}
     {% block footer %}
+      <footer class="site-footer">
+        <div class="container is-max-widescreen">
+          <div class="columns is-align-items-flex-start">
+            <div class="column is-justify-content-center is-align-items-flex-start is-flex">
+              <img src="/images/logo-lcdz-blanc.png" alt="Logo LCDZ" />
+            </div>
+            <div class="column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+              <p class="is-size-4 mb-4">Nous contacter :</p>
 
+              <p>
+                <a href="mailto:contact@lacouleurduzebre.com">contact@lacouleurduzebre.com</a>
+              </p>
+              <a href="tel:0369964169">03 69 96 41 69</a>
+            </div>
+            <div class="site-footer--mentions column is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+              <p class="has-text-centered">
+                Application développée par <br /> <a href="https://www.lacouleurduzebre.com" target="_blank">la couleur du Zèbre</a> <br /> et mise à disposition par <br /> ...
+              </p>
+              <a href="{{ path('mentions_legales') }}">Mentions légales</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     {% endblock %}
   </body>
 </html>

@@ -6,84 +6,92 @@
 
 {% block body %}
   <main class="static-content">
-    <div class="hero is-warning">
+    <div class="hero is-secondary">
       <div class="hero-body container">
-        <h1>OnePageBuilder, l'outil Alsacien du créateur d'entreprise</h1>
+        <h1 class="has-text-white">OnePageBuilder, l'outil Alsacien du créateur d'entreprise</h1>
       </div>
     </div>
+    <section>
+      <div class="tile is-ancestor is-align-items-center">
+        <div class="px-2 tile is-parent is-vertical is-6">
+          <h2 class="px-2 tile is-child has-text-centered">Avec OPB, développez votre site professionnel en quelques clics</h2>
+          <p class="is-size-4 is-child has-text-centered">
+            Utilisez le <a href="{{ path('builder_form_js') }}">formulaire d'édition</a>
+            pour effectuer des modifications en temps réel sur votre site vitrine.
+          </p>
+        </div>
+        <img class="tile is-parent is-6 mx-auto my-6 is-flex" src="{{ asset('images/undraw_portfolio_website.svg') }}" alt="Illustration humain avec site web" />
+      </div>
+    </section>
     <section class="container">
-      <h2>Avec OPB, développez votre site professionnel en quelques clics</h2>
-
-      <p class="highlight">Utilisez le formulaire d'édition pour effectuer des modifications en temps réel sur votre site vitrine.</p>
-
-      <div class="article p-6">
+      <div class="article p-4">
         <h3>L'éditeur de contenu qui s'adapte à vos besoins</h3>
 
         <p>Sélectionnez les sections qui correspondent à votre site et ajoutez votre contenu en toute simplicité, aucune connaissance technique n'est nécessaire !</p>
       </div>
     </section>
-    <section class="container">
-      <div class="columns is-justify-content-center is-multiline">
-        <article class="card column m-4 is-3">
+    <section class="container fonctionnalites-gallery">
+      <div class="columns is-justify-content-center is-multiline mx-4">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-colors.jpg') }}" alt="Choix de couleurs" />
             </figure>
           </div>
           <div class="card-content">
             <h4 class="card-title">Choix du thème de couleurs</h4>
           </div>
         </article>
-        <article class="card column m-4 is-3">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-produits.jpg') }}" alt="Ajout de produits ou services" />
             </figure>
           </div>
           <div class="card-content">
             <h4 class="card-title">Produits ou services</h4>
           </div>
         </article>
-        <article class="card column m-4 is-3">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-faq.webp') }}" alt="Foire aux questions" />
             </figure>
           </div>
           <div class="card-content">
             <h4 class="card-title">Foire aux Questions</h4>
           </div>
         </article>
-        <article class="card column m-4 is-3">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-contact.jpg') }}" alt="Formulaire de contact et coordonnées" />
             </figure>
           </div>
           <div class="card-content">
             <h4 class="card-title">Coordonnées et formulaire de contact</h4>
           </div>
         </article>
-        <article class="card column m-4 is-3">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-galerie.webp') }}" alt="Galerie de photos" />
             </figure>
           </div>
           <div class="card-content">
             <h4 class="card-title">Galerie de photos</h4>
           </div>
         </article>
-        <article class="card column m-4 is-3">
+        <article class="card column p-0 m-4 is-3">
           <div class="card-image">
             <!-- placeholder image -->
             <figure class="image is-3by2">
-              <img src="https://bulma.io/images/placeholders/480x320.png" alt="" />
+              <img src="{{ asset('/images/fonctionnalites/fonctionnalite-temoignages.webp') }}" alt="" />
             </figure>
           </div>
           <div class="card-content">
@@ -92,8 +100,12 @@
         </article>
       </div>
     </section>
-    <section class="container">
-      <div class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
+    <section class="container px-4 my-6">
+      <h3>Qu'est-ce-que c'est exactement ?</h3>
+      <p>OnePageBuilder est un outil imaginé et développé par la couleur du Zèbre, une agence web alsacienne située à Strasbourg. Une agence avec 10 ans d'expérience en communication digitale pour vous accompagner plus loin dans votre projet web : dans le graphisme, le développement, le référencement, la vente en ligne, la formation, le conseil et la stratégie, etc. Bref, le web à 360°.</p>
+    </section>
+    <section class="container px-4 my-6">
+      <div class="">
         <h3>Comment y accéder ?</h3>
 
         <p>

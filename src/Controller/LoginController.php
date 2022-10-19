@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Form\EditUserType;
+use App\Form\EditServerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Entity\User;
@@ -60,21 +60,22 @@ class LoginController extends AbstractController
 
         $serverInfo = $user->getServerInfo();
 
-        //Create the form
-        $editUserForm = $this->createForm(EditUserType::class, $user);
+        //Create the FTP Server form
+        $editServerForm = $this->createForm(EditServerType::class, $user);
 
+        //Create
         
         
         //Handling the form
         //TODO : Refactoriser tout ça
-        $editUserForm->handleRequest($request);
-        if ($editUserForm->isSubmitted() && $editUserForm->isValid()) {
+        $editServerForm->handleRequest($request);
+        if ($editServerForm->isSubmitted() && $editServerForm->isValid()) {
             //Change user's properties
-            $user = $editUserForm->getData();
+            $user = $editServerForm->getData();
             //Get the ftpInfo field of the form
-            $ftpHost = $editUserForm->get('ftp_host')->getData();
-            $ftpUser = $editUserForm->get('ftp_user')->getData();
-            $ftpPass = $editUserForm->get('ftp_pass')->getData();
+            $ftpHost = $editServerForm->get('ftp_host')->getData();
+            $ftpUser = $editServerForm->get('ftp_user')->getData();
+            $ftpPass = $editServerForm->get('ftp_pass')->getData();
             //Set the ftpInfo property of the serverinfo
             $serverInfo->setFtpHost($ftpHost);
             $serverInfo->setFtpUser($ftpUser);
@@ -88,7 +89,8 @@ class LoginController extends AbstractController
 
         return $this->render('login/profile.html.twig', [
             'user' => $this->getUser(),
-            'editUserForm' => $editUserForm->createView(),
+            'editServerForm' => $editServerForm->createView(),
+
         ]);
     }
 }

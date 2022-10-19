@@ -9,11 +9,15 @@
 
   <div class="container tile my-6 p-4 has-background-light box">
     {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.username, { label: 'Username', label_attr: { class: 'label' }, attr: { class: 'input' } }) }}
-    {{ form_row(registrationForm.plainPassword, { label: 'Password', label_attr: { class: 'label' }, attr: { class: 'input' } }) }}
-    {{ form_row(registrationForm.agreeTerms, { label_attr: { class: 'label' }, attr: { class: 'checkbox' } }) }}
+    {{ form_row(registrationForm.username, { label: "Nom d'utilisateur ", label_attr: { class: 'label' }, attr: { class: 'input' } }) }}
+    {{ form_row(registrationForm.plainPassword, { label: 'Mot de passe', label_attr: { class: 'label my-4' }, attr: { class: 'input' } }) }}
+    <div class="is-flex my-4">
+      <div>{{ form_widget(registrationForm.agreeTerms, { label: "J'accepte les conditions d'utilisation", label_attr: { class: 'checkbox' } }) }}</div>
 
-    <button type="submit" class="button is-primary">Register</button>
+      <label class="ml-2">J'accepte les <a href="{{ path('mentions_legales') }}">conditions d'utilisation</a></label>
+    </div>
+    {# } <div class="is-flex">{{ form_row(registrationForm.agreeTerms, { label_attr: { class: 'label is-flex' }, attr: { class: 'checkbox' } }) }}</div> #}
+    <button type="submit" class="button is-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
   </div>
 {% endblock %}

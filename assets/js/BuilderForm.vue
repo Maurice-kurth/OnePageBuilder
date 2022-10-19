@@ -1,6 +1,8 @@
 <template>
+  <h2 class="has-text-centered">Formulaire pour les informations de votre site
+    web</h2>
   <div class="card container article px-4 py-4 my-6">
-    <h2>Formulaire pour les informations de votre site web</h2>
+
     <p>{{ monMessage }}</p>
     <div class="vue-form my-4">
       <form @submit.prevent="formSubmit">
@@ -29,14 +31,16 @@
         <!-- Envoi du formulaire -->
         <div style="margin-top: 30px" class="field">
           <p class="control">
-            <button type="submit" class="button is-info">Enregistrer les
+            <button type="submit" class="button"
+              :class="[successMessage ? 'is-outline' : 'is-primary']">Enregistrer
+              les
               modifications</button>
           </p>
           <div v-if="successMessage">
             <p>
               {{ successMessage }}
             </p>
-            <a class="button is-success" :href="siteUrl">Voir le site </a>
+            <a class="button is-primary" :href="siteUrl">Voir le site </a>
           </div>
         </div>
         <!-- Fin du formulaire -->
@@ -61,7 +65,7 @@ export default {
   },
   data() {
     return {
-      monMessage: "Hello from Vue !",
+      monMessage: "",
       successMessage: false,
       nomSite: "",
       presentationSite: "",
@@ -158,7 +162,7 @@ export default {
       this.products.pop();
     },
     addFaqQuestion() {
-      this.faqElements.push({ question: "", reponse: "", isClosed: false });
+      this.faqElements.push({ question: "Question", reponse: "Réponse", isClosed: false });
     },
     removeFaqQuestion() {
       this.faqElements.pop();

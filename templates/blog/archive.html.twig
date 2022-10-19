@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-  <section class="archive container">
+  <section class="archive container is-max-desktop">
+    <h1>Actualités et mises à jour</h1>
     {% for post in blogPosts %}
       <article class="card p-6 my-6">
         <div class="article-title">
+          <p>Publié le : {{ post.createdAt|date('d M Y ') }}</p>
           <h3>{{ post.title }}</h3>
         </div>
         <div class="article-content">{{ post.content|u.truncate(45, '...')|raw }}</div>
-
-        <a class="button is-primary my-4" href="{{ path('single_post', { id: post.id }) }}">Voir l'article</a>
+        <p class="has-text-right">
+          <a class="button is-primary my-4" href="{{ path('single_post', { id: post.id }) }}">Voir l'article</a>
+        </p>
       </article>
     {% endfor %}
   </section>

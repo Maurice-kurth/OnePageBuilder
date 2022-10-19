@@ -14,11 +14,32 @@
     </div>
   {% else %}
     <div class="container has-text-centered my-5">
-      <p>Il semblerait que vous n'ayez pas encore de site...</p>
+      <p class="my-5">Il semblerait que vous n'ayez pas encore de site...</p>
       <a href="{{ path('builder_form_js') }}" class="button is-primary">Créez un site maintenant !</a>
     </div>
   {% endif %}
-  <div class="container">{{ form_start(editUserForm) }}
-    {{ form_widget(editUserForm) }}
-    {{ form_end(editUserForm) }}</div>
+  <main class="container">
+    <div class="columns">
+      <div class="column form">
+        <h3 class="has-text-centered">Modifiez vos informations de serveur</h3>
+        {{ form_start(editServerForm) }}
+        {# {{ form_widget(editServerForm) }} #}
+
+        <div class="field">
+          <div class="control">{{ form_row(editServerForm.ftp_host, { attr: { class: 'input' }, label: 'Adresse du serveur FTP' }) }}</div>
+        </div>
+        <div class="field">
+          <div class="control">{{ form_row(editServerForm.ftp_user, { attr: { class: 'input' }, label: "Nom d'utilisateur du serveur FTP" }) }}</div>
+        </div>
+        <div class="field">
+          <div class="control">{{ form_row(editServerForm.ftp_pass, { attr: { class: 'input' }, label: 'Mot de passe du serveur FTP' }) }}</div>
+        </div>
+        {{ form_end(editServerForm) }}
+      </div>
+      <div class="column">
+        <h3 class="has-text-centered">Modifier vos coordonnées utilisateur</h3>
+        <div class="form"></div>
+      </div>
+    </div>
+  </main>
 {% endblock %}
