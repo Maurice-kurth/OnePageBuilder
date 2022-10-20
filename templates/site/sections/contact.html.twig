@@ -4,25 +4,21 @@
       <div class="tile is-child block">
         <h3 class="title">Coordonnées</h3>
         <p class="is-flex is-align-items-center">
-          <i class="fas fa-phone mr-2"></i> <a href="tel:#">01 02 03 04 05 06</a>
+          <i class="fas fa-phone mr-2"></i> <a href="tel:{{ contactinfo.telephone }}">{{ contactinfo.telephone }}</a>
         </p>
         <br />
         <i class="fas fa-at mr-1"></i>
-        <a href="mailto:#">example@mail.com</a>
+        <a href="mailto:{{ contactinfo.email }}">{{ contactinfo.email }}</a>
       </div>
       <div class="tile is-child">
         <h3 class="title">Adresse</h3>
         <address>
-          1 rue des jardins, <br /> 67000 Strasbourg
+          {{ contactinfo.adresse }} <br /> {{ contactinfo.codePostal }} {{ contactinfo.ville }}
         </address>
       </div>
       <div class="tile is-child">
         <h3 class="title">Horaires</h3>
-        <div class="horaires">
-          <p>Lundi - Vendredi : 9h - 17h</p>
-          <p>Samedi : 9h - 18h</p>
-          <p>Dimanche : fermé</p>
-        </div>
+        <div class="horaires">{{ contactinfo.horaires }}</div>
       </div>
     </div>
     {# 

@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FtpService;
 use App\Entity\SiteWeb;
+use App\Entity\User;
+use App\Entity\ContactInfo;
 use App\Entity\ServerInfo;
 
 class WebsiteController extends AbstractController
@@ -40,23 +42,22 @@ class WebsiteController extends AbstractController
   public function ftp(FtpService $ftpService, SiteWeb $siteWeb, Request $request): Response
   {
 
-    //Ftp info
-    /*$userServerInfo = $this->getUser()->getServerInfo();
-      $ftp_host = $userServerInfo->getFtpHost();
-      $ftp_user = $userServerInfo->getFtpUser();
-      $ftp_pass = $userServerInfo->getFtpPass();
-    */
     $routeParams = $request->attributes->get('_route_params');
     $nomFichier = $routeParams['nom_site'];
 
+    $contactInfo = $siteWeb->getProprietaire()->getContactInfo();
+
+
     $renderedFile = $this->render('site/onepage.html.twig', [
       'site' => $siteWeb,
+      'contactinfo' => $contactInfo,
     ]);
     $ftpService->saveFile($renderedFile->getContent(), $nomFichier);
 
     //redirecttoroute builder_show
     return $this->redirectToRoute('builder_show', [
       'site' => $siteWeb,
+      'contactinfo' => $contactInfo,
       'nom_site' => $siteWeb->getNomSite(),
       'siteSaved' => true,
     ]);

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <section class="hero is-primary is-small has-text-centered py-6">
+    <h1 class="title">Profil et coordonnées de mon business</h1>
+  </section>
+
+  {% if user.siteweb %}
+    <div class="container has-text-centered my-5">
+      <p>Nom d'utilisateur : {{ user.username }}</p>
+
+      <p>Nom de mon site web : {{ user.siteweb.nomSite }}</p>
+      <a href="{{ path('builder_show', { nom_site: user.siteweb.nomSite }) }}" class="button is-primary">Voir mon site</a>
+      <a href="{{ path('builder_form_js') }}" class="button is-info">Modifier mon site</a>
+    </div>
+  {% else %}
+    <div class="container has-text-centered my-5">
+      <p class="my-5">Il semblerait que vous n'ayez pas encore de site...</p>
+      <a href="{{ path('builder_form_js') }}" class="button is-primary">Créez un site maintenant !</a>
+    </div>
+  {% endif %}
+  <main class="container">
+    <div class="columns">
+      <div class="column form">
+        <h3 class="has-text-centered">Modifiez vos informations de contact</h3>
+        {{ form_start(editContactInfo) }}
+        {# {{ form_widget(editServerForm) }} #}
+        {# Form_widget for each row with div.field div.control and then form_row #}
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.email, { attr: { class: 'input' }, label: 'Adresse mail' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.telephone, { attr: { class: 'input' }, label: 'téléphone' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.code_postal, { attr: { class: 'input' }, label: 'Code postal' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.ville, { attr: { class: 'input' }, label: 'Ville' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.adresse, { attr: { class: 'input' }, label: 'Adresse' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.horaires, { attr: { class: 'input' }, label: 'horaires' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.facebook, { attr: { class: 'input' }, label: 'Lien vers la page Facebook' }) }}</div>
+        </div>
+
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.twitter, { attr: { class: 'input' }, label: 'Lien vers la page Twitter' }) }}</div>
+        </div>
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.instagram, { attr: { class: 'input' }, label: 'Lien vers la page Instagram' }) }}</div>
+        </div>
+        <div class="field">
+          <div class="control">{{ form_row(editContactInfo.save, { attr: { class: 'submit button is-info' }, label: 'Sauvegarder' }) }}</div>
+        </div>
+        {{ form_end(editContactInfo) }}
+      </div>
+    </div>
+  </main>
+{% endblock %}

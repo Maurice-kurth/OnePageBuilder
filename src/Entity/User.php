@@ -35,6 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?ServerInfo $serverInfo = null;
 
+    #[ORM\OneToOne(mappedBy: 'utilisateur', cascade: ['persist', 'remove'])]
+    private ?ContactInfo $contactInfo = null;
+
 
 
     public function getId(): ?int
@@ -137,6 +140,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->serverInfo = $serverInfo;
+
+        return $this;
+    }
+
+    public function getContactInfo(): ?ContactInfo
+    {
+        return $this->contactInfo;
+    }
+
+    public function setContactInfo(ContactInfo $contactInfo): self
+    {
+        // set the owning side of the relation if necessary
+        if ($contactInfo->getUtilisateur() !== $this) {
+            $contactInfo->setUtilisateur($this);
+        }
+
+        $this->contactInfo = $contactInfo;
 
         return $this;
     }

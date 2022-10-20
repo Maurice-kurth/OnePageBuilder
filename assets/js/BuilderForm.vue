@@ -166,7 +166,7 @@ export default {
         name: "",
         price: 0,
         description: "",
-        image: "product-image-" + this.products.length,
+        image: "aucune image",
       });
     },
     removeProduct() {

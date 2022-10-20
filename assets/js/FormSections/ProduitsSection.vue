@@ -13,8 +13,7 @@
                     <div class="control">
                         <input class="input" type="text" v-model="product.name"
                             placeholder="Nom du produit" />
-                        <input class="input" type="text" v-model="product.price"
-                            placeholder="prix du produit" />
+                        <img :src="product.temporaryImageUrl" alt="">
                         <input class="input" type="text"
                             v-model="product.description">
                         <div class="file has-name">
@@ -31,7 +30,8 @@
                                     </span>
                                 </span>
                                 <span class="file-name">
-                                    Aucun fichier sélectionné
+                                    {{ product.isUploaded ? 'Fichier téléversé' : 'Aucun fichier sélectionné'}}
+
                                 </span>
                             </label>
                         </div>
@@ -70,6 +70,7 @@ export default {
             let uploadedProductImage = event.target.files[0];
             let index = event.target.id
             //console.log(uploadedProductImage);
+            this.products[index].isUploaded = true;
             this.$emit("product-image-upload", uploadedProductImage, index);
         },
     },

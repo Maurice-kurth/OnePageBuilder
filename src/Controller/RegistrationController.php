@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\ServerInfo;
+use App\Entity\ContactInfo;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,7 @@ class RegistrationController extends AbstractController
             );
             //set the user serverinfo parameters to empty strings
             $user->setServerInfo(new ServerInfo());
-            
+            $user->setContactInfo(new ContactInfo());
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email

@@ -20,56 +20,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class BuilderController extends AbstractController
 {
   
-    #[Route('/builderform', name: 'builder_form')]
-    public function buildForm(Request $request, ManagerRegistry $doctrine): Response
-    {
-       
-
-        //Create a new SiteWeb object and initialize it with some data for this example
-        $siteWeb = new SiteWeb();
-        $siteWeb->setCreatedAt(new \DateTimeImmutable('now'));
-
-        $siteWeb->setThemeColors(['#25316D', '#5F6F94', '#97D2EC']);
-        //make current user the proprietaire
-        $siteWeb->setProprietaire($this->getUser());
-        //Set products of siteweb as an array of arrays
-        $siteWeb->setProducts([
-            ['name' => 'Product 1', 'price' => 19.99, 'weight' => 1.5],
-            ['name' => 'Product 2', 'price' => 9.99, 'weight' => 0.5],
-            ['name' => 'Product 3', 'price' => 29.99, 'weight' => 2.5],
-        ]);
-        $siteWebForm = $this->createFormBuilder($siteWeb)
-            ->add('nom_site', TextType::class)
-            ->add('description_site', TextAreaType::class)
-           // ->add('products', ProductType::class, ['attr' => array('class'=>'productFields')])
-
-            ->add('save', SubmitType::class, ['label' => 'Créer mon Site Web'])
-
-            ->getForm();
-
-
-        //Handle the request
-        $siteWebForm->handleRequest($request);
-        if ($siteWebForm->isSubmitted() && $siteWebForm->isValid()) {
-            // $form->getData() holds the submitted values
-            $siteWeb = $siteWebForm->getData();
-
-            // ... perform some action, such as saving the task to the database
-            // for example, if Task is a Doctrine entity, save it!
-            $entityManager = $doctrine->getManager();
-            $entityManager->persist($siteWeb);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('builder_success', ['nom_site' => $siteWeb->getNomSite()]);
-        }
-
-
-
-
-        return $this->renderForm('builder/buildform.html.twig', [
-            'siteWebForm' => $siteWebForm,
-        ]);
-    }
    
 
     #[Route('/builder/site/{nom_site}', name: 'builder_show', methods: ['GET'] )]
@@ -78,8 +28,10 @@ class BuilderController extends AbstractController
 
         //get url parameter siteSaved
         $siteSaved = $request->query->get('siteSaved');
+        $contactInfo = $request->query->get('contactInfo');
         return $this->render('site/preview.html.twig', [
             'site' => $siteWeb,
+            'contactinfo' => $siteWeb->getProprietaire()->getContactInfo(),
             'siteSaved' => $siteSaved,
             'sitePublished' => false,
             'isPreview' => true,

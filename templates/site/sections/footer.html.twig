@@ -1,18 +1,18 @@
 <div class="container footer-contact">
   <div class="is-flex is-align-items-center is-justify-content-space-evenly">
     <div class="is-flex-touch is-flex-direction-column is-justify-content-center is-align-items-center">
-      <p class="is-flex is-align-items-center">
-        <i class="fas fa-phone mr-2"></i> <a href="tel:#">01 02 03 04 05 06</a>
+      <p class="is-flex is-align-items-center is-justify-content-start">
+        <i class="fas fa-phone mr-2"></i> <a href="tel:{{ contactinfo.telephone }}">{{ contactinfo.telephone }}</a>
       </p>
       <br />
       <div class="is-flex is-justify-content-center is-align-items-center">
         <i class="fas fa-at mr-1"></i>
-        <a href="mailto:#">example@mail.com</a>
+        <a href="mailto:{{ contactinfo.email }}">{{ contactinfo.email }}</a>
       </div>
       <div class="reseaux-sociaux is-flex is-justify-content-center mt-4">
-        <a class="mx-4" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-        <a class="mx-4" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-        <a class="mx-4" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a class="mx-4" href="{{ contactinfo.facebook }}"><i class="fab fa-facebook-f"></i></a>
+        <a class="mx-4" href="{{ contactinfo.twitter }}"><i class="fab fa-twitter"></i></a>
+        <a class="mx-4" href="{{ contactinfo.instagram }}"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
     <div class="is-flex is-justify-content-center is-align-items-center">
