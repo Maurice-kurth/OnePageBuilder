@@ -9,11 +9,16 @@
 
 {% block header %}
   <header>
-    <nav class="navbar">
+    <nav class="navbar" aria-label="main-navigation" role="navigation">
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item" href="{{ path('builder') }}"><img src="images/sitelogo.png" alt="Logo" /></a>
-          <span class="navbar-burger burger" data-target="navbarMenu"></span>
+
+          <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
 
         {% include 'site/sections/navigation.html.twig' %}
@@ -66,6 +71,23 @@
         faqAnswer.classList.toggle('show')
         arrow.classList.toggle('fa-caret-up')
         arrow.classList.toggle('fa-caret-down')
+      })
+    })
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get all "navbar-burger" elements
+      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0)
+    
+      // Add a click event on each of them
+      $navbarBurgers.forEach((el) => {
+        el.addEventListener('click', () => {
+          // Get the target from the "data-target" attribute
+          const target = el.dataset.target
+          const $target = document.getElementById(target)
+    
+          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+          el.classList.toggle('is-active')
+          $target.classList.toggle('is-active')
+        })
       })
     })
   </script>

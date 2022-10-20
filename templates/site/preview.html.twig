@@ -9,36 +9,45 @@
 {% endblock %}
 
 {% block header %}
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/uploads/{{ site.proprietaire.username }}/sitelogo.png" alt="Logo" /></a>
-        <span class="navbar-burger burger" data-target="navbarMenu"></span>
-      </div>
-      {% if is_granted('ROLE_USER') %}
-        <div class="navbar-start is-align-self-center">
-          <div class="is-flex">
-            <a href="{{ path('builder_form_js') }}" class="button is-outline is-dark mx-4">Modifier <i class="ml-2 fa-solid fa-pen-to-square"></i></a>
+  <header>
+    <nav class="navbar" aria-label="main-navigation" role="navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="{{ path('builder') }}"><img src="/images/uploads/{{ site.proprietaire.username }}/sitelogo.png" alt="Logo" /></a>
 
-            <a href="{{ path('ftp_save', { nom_site: site.nomSite }) }}" class="button is-outline mx-4">Sauvegarder <i class="ml-2 fa-solid fa-floppy-disk"></i></a>
-
-            <a href="{{ path('ftp_send', { nom_site: site.nomSite }) }}" class="button is-info">Publier <i class="ml-2 fa-solid fa-arrow-up-from-bracket"></i></a>
-
-            {% if siteSaved %}
-              <p class="is-size-4 ml-2 admin-only">
-                <i class="fas fa-check has-text-success"></i> Le site vient d'être sauvegardé !
-              </p>
-            {% elseif siteSent is defined %}
-              <p>Le site vient d'être mis en ligne !</p>
-            {% else %}
-              {# nothing #}
-            {% endif %}
-          </div>
+          <a role="button" class="navbar-burger" data-target="navBurger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
         </div>
-      {% endif %}
-      {% include 'site/sections/navigation.html.twig' %}
-    </div>
-  </nav>
+        <div class="navbar-menu" id="navMenu">
+          {% if is_granted('ROLE_USER') %}
+            <div class="navbar-end is-align-self-center">
+              <div class="is-flex">
+                <a href="{{ path('builder_form_js') }}" class="button is-outline is-dark mx-4">Modifier <i class="ml-2 fa-solid fa-pen-to-square"></i></a>
+
+                <a href="{{ path('ftp_save', { nom_site: site.nomSite }) }}" class="button is-outline mx-4">Sauvegarder <i class="ml-2 fa-solid fa-floppy-disk"></i></a>
+
+                <a href="{{ path('ftp_send', { nom_site: site.nomSite }) }}" class="button is-info">Publier <i class="ml-2 fa-solid fa-arrow-up-from-bracket"></i></a>
+
+                {% if siteSaved %}
+                  <p class="is-size-4 ml-2 admin-only">
+                    <i class="fas fa-check has-text-success"></i> Le site vient d'être sauvegardé !
+                  </p>
+                {% elseif siteSent is defined %}
+                  <p>Le site vient d'être mis en ligne !</p>
+                {% else %}
+                  {# nothing #}
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+          {% include 'site/sections/navigation.html.twig' %}
+        </div>
+      </div>
+    </nav>
+  </header>
 {% endblock %}
 {% block main %}
   {% include 'site/sections/hero.html.twig' %}
@@ -70,6 +79,13 @@
     //get is-secondary and set their background-color
     document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
       el.style.color = themeColors['primary']
+    })
+    document.addEventListener('DOMContentLoaded', () => {
+      //clicking on .navbar-burger toggle the .is-active class on .navbar-menu
+      document.querySelector('.navbar-burger').addEventListener('click', () => {
+        document.querySelector('#navMenu').classList.toggle('is-active')
+        document.querySelector('[data-target="navBurger"]').classList.toggle('is-active')
+      })
     })
   </script>
 {% endblock %}

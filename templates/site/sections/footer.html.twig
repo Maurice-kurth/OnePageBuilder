@@ -1,23 +1,39 @@
-<div class="container">
-  <div class="columns">
-    <div class="column">
+<div class="container footer-contact">
+  <div class="is-flex is-align-items-center is-justify-content-space-evenly">
+    <div class="is-flex-touch is-flex-direction-column is-justify-content-center is-align-items-center">
       <p class="is-flex is-align-items-center">
         <i class="fas fa-phone mr-2"></i> <a href="tel:#">01 02 03 04 05 06</a>
       </p>
       <br />
-      <i class="fas fa-at mr-1"></i>
-      <a href="mailto:#">example@mail.com</a>
-    </div>
-
-    <div class="column">
-      <div class="reseaux-sociaux">
-        <a class="column" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-        <a class="column" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
-        <a class="column" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+      <div class="is-flex is-justify-content-center is-align-items-center">
+        <i class="fas fa-at mr-1"></i>
+        <a href="mailto:#">example@mail.com</a>
+      </div>
+      <div class="reseaux-sociaux is-flex is-justify-content-center mt-4">
+        <a class="mx-4" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a class="mx-4" href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+        <a class="mx-4" href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
-    <div class="column">
-      <p>Site développé avec l'application OnePageBuilder par la couleur du Zèbre</p>
+    <div class="is-flex is-justify-content-center is-align-items-center">
+      <ul class="my-4">
+        {% if site.products is defined %}
+          <li>
+            <a href="#produits">Produits</a>
+          </li>
+        {% endif %}
+        {% if site.faq is defined %}
+          <li>
+            <a href="#faq">FAQ</a>
+          </li>
+        {% endif %}
+        <li class="">
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="">
+      <p class="">Site développé avec l'application OnePageBuilder par la couleur du Zèbre</p>
     </div>
   </div>
 </div>

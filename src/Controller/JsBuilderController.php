@@ -69,6 +69,7 @@ function getSiteInfo(Request $request, ManagerRegistry $doctrine)
         'products' => $siteWeb->getProducts(),
         'username' => $siteWeb->getProprietaire()->getUsername(),
         'faq' => $siteWeb->getFaq(),
+        'selectedThemeColor' => 'darkblue',
     ];
     return $this->json($siteWebArray);
 }

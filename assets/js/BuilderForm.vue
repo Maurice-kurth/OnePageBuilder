@@ -209,7 +209,8 @@ export default {
       this.products = data.products || this.products;
       this.username = data.username;
       this.faqElements = data.faq || this.faqElements;
-      this.selectedThemeColors = data.themeColors;
+      this.selectedThemeColor = data.selectedThemeColor;
+      console.log(this.selectedThemeColor);
     },
     //Database stuff
     saveToDb() {
@@ -225,6 +226,7 @@ export default {
       formData.append("presentationSite", this.presentationSite);
       formData.append("products", JSON.stringify(this.products));
       formData.append("themeColors", JSON.stringify(this.pickedThemeColors));
+      formData.append("selectedThemeColor", this.selectedThemeColors);
       formData.append("faq", JSON.stringify(this.faqElements));
 
       axios
