@@ -23,7 +23,8 @@
         </section>
         <!--  Section Produits ou services : Produits (array) -->
         <ProduitsSection :products="products" @remove-product="removeProduct"
-          @add-product="addProduct" />
+          @add-product="addProduct"
+          @product-image-upload="productImageUpload" />
 
         <!-- Section FAQ -->
         <FaqSection :faqElements="faqElements" @add-question="addFaqQuestion"
@@ -72,6 +73,8 @@ export default {
       siteLogo: "",
       username: "",
       temporaryLogoUrl: "",
+      temporaryProductImageUrl: "",
+      productImage: "",
       faqElements: [
         {
           question: "Q1",
@@ -81,10 +84,14 @@ export default {
       ],
       products: [
         {
+          id: 0,
           name: "Produit 0",
           price: 0,
+          description: "Description du produit 0",
+          image: "",
         },
       ],
+      productImages: [],
       // themeColors is an array of objects with 2 properties: name (string) and colors: (array of strings)
       //Order of colors in the array is important, it will be used to generate the palette with :
       // 1 = Primary color, 2 = Background color, 3 = Accent color
@@ -124,7 +131,8 @@ export default {
     },
     previousLogo() {
       return "/images/uploads/" + this.username + "/sitelogo.png";
-    }
+    },
+
   },
   watch: {
     themeColors: function (newVal, oldVal) {
@@ -154,8 +162,11 @@ export default {
   methods: {
     addProduct() {
       this.products.push({
+        id: this.products.length,
         name: "",
         price: 0,
+        description: "",
+        image: "product-image-" + this.products.length,
       });
     },
     removeProduct() {
@@ -174,6 +185,14 @@ export default {
       this.siteLogo = uploadedLogo;
       this.temporaryLogoUrl = URL.createObjectURL(uploadedLogo);
     },
+    productImageUpload(uploadedImage, index) {
+      this.products[index].image = "product-image-" + index;
+      this.products[index].temporaryImageUrl = URL.createObjectURL(uploadedImage);
+      this.productImages[index] = uploadedImage;
+      this.productImage = uploadedImage;
+      console.log(this.productImage);
+      console.log(this.productImages[0]);
+    },
     updatePresentationSite(presentationSite) {
       this.presentationSite = presentationSite;
     },
@@ -190,6 +209,7 @@ export default {
       this.products = data.products || this.products;
       this.username = data.username;
       this.faqElements = data.faq || this.faqElements;
+      this.selectedThemeColors = data.themeColors;
     },
     //Database stuff
     saveToDb() {
@@ -197,11 +217,16 @@ export default {
       if (this.siteLogo != null) {
         formData.append("siteLogo", this.siteLogo);
       }
+      //For each element in this.productImages, append it to the formdata with a unique name
+      this.productImages.forEach((image, index) => {
+        formData.append("product-image-" + index, image);
+      });
       formData.append("nom_site", this.nomSite);
       formData.append("presentationSite", this.presentationSite);
       formData.append("products", JSON.stringify(this.products));
       formData.append("themeColors", JSON.stringify(this.pickedThemeColors));
       formData.append("faq", JSON.stringify(this.faqElements));
+
       axios
         .post("/api/jsform", formData, {
           headers: {

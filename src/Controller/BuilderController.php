@@ -82,6 +82,7 @@ class BuilderController extends AbstractController
             'site' => $siteWeb,
             'siteSaved' => $siteSaved,
             'sitePublished' => false,
+            'isPreview' => true,
         ]);
     }
 

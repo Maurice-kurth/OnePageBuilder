@@ -3,8 +3,9 @@
 namespace App\Service;
 
 use App\Entity\SiteWeb;
-use Symfony\Component\Security\Core\Security;
 use Monolog\DateTimeImmutable;
+use Symfony\Component\Security\Core\Security;
+
 //Ce Service permet de créer un site web à partir des données du formulaire
 //Il est appelé à partir du Controller JsBuilderController (en POST)
 //Il récupère $data qui est un FormData avec des variables (String, tableaux, objets) et des fichiers (fileType)
@@ -12,7 +13,7 @@ class OnePageCreatorService
 {
     private $local_websites_dir;
     private $security;
-    public function __construct(string $local_websites_dir, Security $security,)
+    public function __construct(string $local_websites_dir, Security $security, )
     {
 
         $this->local_websites_dir = $local_websites_dir;
@@ -36,7 +37,7 @@ class OnePageCreatorService
 
         $project_dir = $this->local_websites_dir;
 
-        //Créé un dossier pour l'utilisateur sur le dossier SF 
+        //Créé un dossier pour l'utilisateur sur le dossier SF
         $destination_root = $project_dir . '/public/images/uploads/' . $user->getUsername();
         if (!file_exists($destination_root)) {
             mkdir($destination_root, 0777, true);
@@ -50,47 +51,57 @@ class OnePageCreatorService
 
         }
 
-
     }
 
     public function getFormData($data, $request)
     {
 
         $user = $this->security->getUser();
-        //**** Attribute data - Affectation par défaut en cas de données vides. ****//
+
+        $project_dir = $this->local_websites_dir;
 
         //Section Informations générales
         $siteName = $data['nom_site'];
         $siteDescription = $data['presentationSite'];
 
-        $project_dir = $this->local_websites_dir;
         //Section Logo
         $destination = $project_dir . '/userwebsites/' . $user->getUsername() . '/';
         $destination_root = $project_dir . '/public/images/uploads/' . $user->getUsername() . '/';
-        $siteLogo = $request->files->get('siteLogo') ?? "pas de logo" ;
-
-       
+        $siteLogo = $request->files->get('siteLogo') ?? "pas de logo";
 
         //Récupération du logo
         if (isset($siteLogo)) {
             //save $siteLogo to $destination folder
-           // move_uploaded_file( $siteLogo, $destination_root."/sitelogo.png");
-           move_uploaded_file( $siteLogo, $destination."/images/sitelogo.png");
-           copy($destination."images/sitelogo.png", $destination_root."/sitelogo.png");
+            // move_uploaded_file( $siteLogo, $destination_root."/sitelogo.png");
+            move_uploaded_file($siteLogo, $destination . "/images/sitelogo.png");
+            copy($destination . "images/sitelogo.png", $destination_root . "/sitelogo.png");
+        }
+
+        //Section Produits
+        //Chaque élément uploadé commençant par "product-image" est déplacé dans le dossier images de l'utilisateur
+        $productImages = [];
+        foreach ($request->files->getIterator() as $key => $value) {
+            if (strpos($key, 'product-image-') !== false) {
+                $productImages[] = $value;
+                $destination = $project_dir . '/userwebsites/' . $user->getUsername() . '/images/';
+                $destination_root = $project_dir . '/public/images/uploads/' . $user->getUsername() . '/';
+                move_uploaded_file($value, $destination . $key . '.jpg');
+                copy($destination . $key . '.jpg', $destination_root . $key . '.jpg');
+            }
         }
 
         //Section Design et Thème
         $siteThemeColors = json_decode($data['themeColors'], true) ?? ['#000000', '#ffffff', '#333333'];
 
         //Section Produits ou Services
-        $siteProducts = json_decode($data['products'], true) ?? [['name' => 'Product manquant', 'price' => 0, 'weight' => 1.6]];
+        $siteProducts = json_decode($data['products'], true) ?? [['name' => 'Product manquant', 'price' => 0, 'price' => 1.6, 'description' => 'Description manquante', 'image' => 'https://via.placeholder.com/150']];
 
         //Section FAQ
         $siteFAQ = json_decode($data['faq'], true) ?? [['question' => 'Question vide', 'reponse' => 'Réponse vide']];
 
         //Create a .txt file in the destination folder and write the data in it
         $file = fopen($destination . 'siteinfo.txt', 'w');
-        fwrite($file, $siteName . "\n" . "\r" . 'Mis à jour le : '.date('d/m/Y H:i:s'));
+        fwrite($file, $siteName . "\n" . "\r" . 'Mis à jour le : ' . date('d/m/Y H:i:s'));
         fclose($file);
 
         //exécuter la fonction qui va créer le site web

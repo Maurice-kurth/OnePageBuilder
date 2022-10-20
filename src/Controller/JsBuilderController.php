@@ -15,11 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class JsBuilderController extends AbstractController
 {
 
-    #[Route('/builderjs', name:'builder_form_js')]
+    #[Route('/onepage-builder', name:'builder_form_js')]
 function renderJsForm()
     {
     $view = $this->renderView('/js_builder/jsbuilder.html.twig', [
-      
+
     ]);
     return new Response($view);
 }

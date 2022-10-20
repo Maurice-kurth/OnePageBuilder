@@ -5,13 +5,19 @@
         <div class="column is-4">
           <div class="card is-shady">
             <div class="card-image">
-              <figure class="image is-3by2 is-128x128"></figure>
+              <figure class="image is-3by2">
+                {% if isPreview is defined %}
+                  <img src="../../images/uploads/{{ site.proprietaire.username }}/product-image-{{ product.id }}.jpg" alt="{{ product.name }}" />
+                {% else %}
+                  <img src="images/product-image-{{ product.id }}.jpg" alt="{{ product.name }}" />
+                {% endif %}
+              </figure>
             </div>
             <div class="card-content">
               <h3>{{ product.name }}</h3>
-              <p class="my-4">Nous proposons ceci Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, excepturi.</p>
+              <p class="my-4">{{ product.description }}</p>
               <div class="card-cta is-flex is-justify-content-end">
-                <a href="#contact" class="button is-secondary">Acheter pour {{ product.price }}€</a>
+                <a href="#contact" class="button is-secondary">Nous contacter</a>
               </div>
             </div>
           </div>
