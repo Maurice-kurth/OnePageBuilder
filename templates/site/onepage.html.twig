@@ -4,6 +4,7 @@
 {% endblock %}
 {% block styles %}
   <link rel="stylesheet" href="css/bulma.min.css" />
+  <link rel="stylesheet" href="css/onepageDefault.css" />
 {% endblock %}
 
 {% block header %}
@@ -31,9 +32,7 @@
     {% include 'site/sections/faq.html.twig' %}
   {% endif %}
 
-  {% if site.contact is defined %}
-    {% include 'site/sections/contact.html.twig' %}
-  {% endif %}
+  {% include 'site/sections/contact.html.twig' %}
 {% endblock %}
 {% block footer %}
   {% include 'site/sections/footer.html.twig' %}
@@ -43,15 +42,31 @@
   <script>
     const themeColors = JSON.parse('{{ site.themeColors | json_encode | raw }}')
     document.querySelectorAll('.is-primary').forEach((el) => {
-      el.style.backgroundColor = themeColors['primary']
-    })
-    //get is-secondary and set their background-color
-    document.querySelectorAll('.is-secondary').forEach((el) => {
       el.style.backgroundColor = themeColors['tertiary']
     })
     //get is-secondary and set their background-color
+    document.querySelectorAll('.is-secondary').forEach((el) => {
+      el.style.backgroundColor = themeColors['secondary']
+    })
+    //get is-secondary and set their background-color
     document.querySelectorAll('h1, h2, h3, h4').forEach((el) => {
-      el.style.color = themeColors['secondary']
+      el.style.color = themeColors['primary']
+    })
+    
+    //Clicking .faq-question will toggle the .faq-answer class .show - vanilla js
+    
+    const faqQuestions = document.querySelectorAll('.faq-question')
+    //faqAnswer is the next .faq-answer sibling of the faqQuestion
+    
+    faqQuestions.forEach((faqQuestion) => {
+      faqQuestion.addEventListener('click', () => {
+        const arrow = faqQuestion.querySelector('i')
+    
+        const faqAnswer = faqQuestion.nextElementSibling
+        faqAnswer.classList.toggle('show')
+        arrow.classList.toggle('fa-caret-up')
+        arrow.classList.toggle('fa-caret-down')
+      })
     })
   </script>
 {% endblock %}

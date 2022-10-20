@@ -1,0 +1,140 @@
+/** Bulma import */
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css");
+
+/*
+.is-info {
+    background-color: #1E91B3 !important;
+    color: white;
+}
+
+.is-primary {
+    background-color: #A2BB0A !important;
+    color: white;
+}
+
+.is-secondary {
+    background-color: #F39200 !important;
+    color: white;
+}
+
+.is-outlined {
+    border-color: #A2BB0A !important;
+    color: #A2BB0A !important;
+}
+
+.is-warning {
+    background-color: #EFF0EB !important;
+    color: white !important;
+}
+*/
+.button:hover {
+    background-color: #4E4E4E !important;
+    color: white !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    /*color: #1E91B3;*/
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-block: 2.5rem;
+    text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+h2 {
+    font-size: 3rem;
+    margin-block: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+h3 {
+    font-size: 2rem;
+    margin-block: .5rem;
+}
+
+@media screen and (max-width: 1024px) {
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+
+.navbar-item img {
+    max-height: 5rem;
+}
+
+.tabs ul {
+    border: none;
+}
+
+.tabs ul i {
+    font-size: 1.5rem;
+}
+
+body {
+    display: -ms-grid;
+    display: grid;
+    min-height: 100vh;
+    -ms-grid-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+}
+
+.hero-body {
+    padding: 0;
+}
+
+/** Onepage styles (Need to be transferred with the folder) **/
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+.faq-question {
+    cursor: pointer;
+}
+
+
+.faq-answer {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s cubic-bezier(0, 1, 0, 1), opacity 0.5s;
+
+}
+
+.faq-answer.show {
+    opacity: 1;
+    max-height: 500px;
+    transition: max-height 1s ease-in-out;
+}
+
+.faq-item:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #D0D1CD;
+    margin-top: 0rem;
+}
+
+/** contact section**/
+.contact-section {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}

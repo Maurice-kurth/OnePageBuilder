@@ -3,7 +3,8 @@
   <title>Prévisualisation : {{ site.nomSite }}</title>
 {% endblock %}
 {% block styles %}
-  {{ encore_entry_link_tags('app') }}
+  {# {{ encore_entry_link_tags('app') }} #}
+  <link rel="stylesheet" href="/css/onepageDefault.css" />
   {{ encore_entry_script_tags('app') }}
 {% endblock %}
 

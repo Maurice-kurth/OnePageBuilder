@@ -8,7 +8,7 @@
           <p>Publié le : {{ post.createdAt|date('d M Y ') }}</p>
           <h3>{{ post.title }}</h3>
         </div>
-        <div class="article-content">{{ post.content|u.truncate(45, '...')|raw }}</div>
+        <div class="article-content">{{ post.content|u.truncate(120, '...')|raw }}</div>
         <p class="has-text-right">
           <a class="button is-primary my-4" href="{{ path('single_post', { id: post.id }) }}">Voir l'article</a>
         </p>

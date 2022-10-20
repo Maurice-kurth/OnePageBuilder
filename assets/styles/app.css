@@ -181,7 +181,7 @@ body {
 }
 
 #vue-builder-form .container {
-  max-width: clamp(300px, 50%, 800px);
+  max-width: clamp(300px, 80%, 800px);
 }
 
 #vue-builder-form .column {
