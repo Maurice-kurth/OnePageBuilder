@@ -36,7 +36,7 @@ class EditServerType extends AbstractType
         $builder->add('ftp_host', TextType::class, array('mapped' => false,'attr' => ['value'=> $user->getServerInfo()->getFtpHost() ]));
         $builder->add('ftp_user', TextType::class, array('mapped' => false, 'attr' => ['value'=> $user->getServerInfo()->getFtpUser()] ));
         $builder->add('ftp_pass', PasswordType::class, array('mapped' => false, 'attr' => ['type' => 'password', 'value'=> $user->getServerInfo()->getFtpPass()] ));
-        $builder->add('save', SubmitType::class, ['label' => 'Sauvegarder mes modifications']);
+        $builder->add('save', SubmitType::class, ['label' => 'Sauvegarder mes modifications', 'attr' => ['type' => 'submit']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
